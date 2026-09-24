@@ -34,7 +34,19 @@
       ],
       "detailImage": "assets/gerber-view.png",
       "detailCaption": "Final top and bottom fabrication views, rendered from exported Gerber and Excellon files. Bottom view is mirrored for viewing from the back.",
-      "download": "assets/MCU-Datalogger-RevA.zip"
+      "download": "assets/MCU-Datalogger-RevA.zip",
+      "codeSnapshots": [
+        {
+          "file": "MCU Datalogger.kicad_pcb",
+          "language": "scheme",
+          "code": "\t(zone\n\t\t(net 2)\n\t\t(net_name \"GND\")\n\t\t(layer \"B.Cu\")\n\t\t(uuid \"576d6925-9c78-4f30-a5b2-48a09377f304\")\n\t\t(hatch edge 0.5)\n\t\t(connect_pads\n\t\t\t(clearance 0.2)\n\t\t)\n\t\t(min_thickness 0.2)\n\t\t(filled_areas_thickness no)\n\t\t(fill yes\n\t\t\t(thermal_gap 0.25)\n\t\t\t(thermal_bridge_width 0.3)\n\t\t)\n\t\t(polygon\n\t\t\t(pts\n\t\t\t\t(xy 114 85.8) (xy 166.1 85.8) (xy 166.1 120.7) (xy 114 120.7)\n\t\t\t)\n\t\t)",
+          "image": "assets/code/data-logger.png",
+          "caption": "Actual KiCad CAD source: the bottom-copper GND zone and thermal-relief parameters. Layout source, not data-logging firmware.",
+          "source": "https://github.com/buffer-cloud/MCU-Datalogger/blob/81d5e552573d87ffdf10b55c19ad52d68e6a7219/MCU%20Datalogger.kicad_pcb#L11350",
+          "startLine": 11350,
+          "endLine": 11369
+        }
+      ]
     },
     {
       "id": "photoacoustic",
@@ -102,7 +114,19 @@
         }
       ],
       "detailImage": "assets/pps-graph.png",
-      "detailCaption": "Original report screenshot: PPS Monitor graph interface. Displayed values are not presented as independently verified measurements."
+      "detailCaption": "Original report screenshot: PPS Monitor graph interface. Displayed values are not presented as independently verified measurements.",
+      "codeSnapshots": [
+        {
+          "file": "lib/pps_window.dart",
+          "language": "dart",
+          "code": "  void _updateGraphData(String metric, double value) {\n    if (_graphData[metric]!.length >= _maxDataPoints) {\n      _graphData[metric]!.removeAt(0);\n    }\n    _graphData[metric]!.add(FlSpot(_timeCounter.toDouble(), value));\n  }",
+          "image": "assets/code/power-interfaces.png",
+          "caption": "Actual Flutter source: keep a bounded history for each telemetry metric, then append a point to its plot. The companion public firmware supplies simulated readings.",
+          "source": "https://github.com/buffer-cloud/bluetooth_web_pv_pps/blob/446a9af38055577b6ffffd74f24c85f498628051/lib/pps_window.dart#L230",
+          "startLine": 230,
+          "endLine": 235
+        }
+      ]
     },
     {
       "id": "networked-nodes",
@@ -136,7 +160,19 @@
         }
       ],
       "detailImage": "assets/priority-messages.png",
-      "detailCaption": "Original internship report screenshot: priority messaging code and serial output."
+      "detailCaption": "Original internship report screenshot: priority messaging code and serial output.",
+      "codeSnapshots": [
+        {
+          "file": "sketch_jun25a.ino",
+          "language": "cpp",
+          "code": "    // Send WebSocket data\n    char payload[128];\n    snprintf(payload, sizeof(payload), \"{\\\"time\\\":%.2f,\\\"value\\\":%.2f,\\\"kbps\\\":%.2f}\", \n             time_sec, sineVal, tx_speed_kbps);\n    \n    wsServer.broadcast(payload);\n    bytesSent += strlen(payload);",
+          "image": "assets/code/networked-nodes.png",
+          "caption": "Original internship firmware excerpt: package generated waveform values as JSON, broadcast them over WebSocket, and count payload bytes. This is the single-node transport building block documented alongside the multi-node experiments.",
+          "source": null,
+          "startLine": 191,
+          "endLine": 197
+        }
+      ]
     }
   ]
 }

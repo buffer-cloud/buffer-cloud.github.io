@@ -2,7 +2,7 @@
 
 Live website: **https://buffer-cloud.github.io/**
 
-A lightweight, responsive engineering portfolio built with semantic HTML, custom CSS, and small progressive-enhancement JavaScript. Four expandable case studies connect original project evidence to specific engineering contributions.
+A lightweight static portfolio with a four-project icon gallery, dedicated project pages, and a separate About/Experience page. Each project card opens its own page in a new tab. Project pages include an overview, original imagery, source-backed code snapshots where available, verification status, and source/download links.
 
 ## Run locally
 
@@ -14,46 +14,43 @@ npm run lint
 npm start
 ```
 
-Open http://127.0.0.1:4173. Set `PORT` to change the preview port. The committed `dist/` directory is also directly deployable; it contains all page content, so navigation and case studies work without JavaScript.
+Open http://127.0.0.1:4173. Set `PORT` to change the preview port. The committed `dist/` directory is directly deployable and needs no client-side JavaScript.
 
-## Edit
+## Edit and build
 
-- `content.json`: project descriptions, evidence/status labels, image paths, repository links.
-- `build.mjs`: renders project data and biography sections into static HTML.
-- `dist/index.html`: page shell, hero, navigation, metadata.
-- `dist/style.css`: responsive layout, visual system, supported-browser scroll animations.
-- `dist/app.js`: deep-linked case studies and optional view tracking.
-- `dist/assets/`: original report images, resume, and PCB-generated deliverables.
-- `SOURCES.md`: source provenance and limits of the available evidence.
+- `content.json`: project descriptions, evidence labels, code excerpts, image paths and source links.
+- `build.mjs`: page templates, project icons, navigation, and static page generation.
+- `dist/style.css`: responsive dark visual system.
+- `dist/index.html`: generated project gallery homepage.
+- `dist/projects/*.html`: generated dedicated project pages.
+- `dist/about.html`: generated background, experience and technical practice page.
+- `dist/assets/`: original report imagery, resume, PCB outputs and rendered code snapshots.
+- `SOURCES.md`: evidence provenance and limitations.
 
-After edits, run `npm run build && npm run lint`. Image links are checked along with document anchors, duplicate IDs, JavaScript syntax, and required project-status qualifications.
+Edit the templates/data, then run `npm run build && npm run lint`. Verification covers all six pages, relative asset links, cross-page anchors, duplicate IDs, and evidence qualifications. Generated HTML is committed so the website remains readable without a framework or JavaScript.
+
+Code snapshots are faithful formatted excerpts, with source filenames/line numbers and original-source links where available. Each PNG also has accessible selectable code text on its project page. Original report screenshots remain unchanged. No verified STM32 firmware was available, so that page uses an explicitly proposed architecture instead of a fabricated code image.
 
 ## Deploy
 
-The public website is hosted on **GitHub Pages**. Push changes to `main` in `buffer-cloud/buffer-cloud.github.io`; `.github/workflows/pages.yml` builds and verifies the site, then publishes `dist/`. Repository Settings → Pages uses GitHub Actions as its source. No extra secrets or dependencies are required.
+Push to `main` in `buffer-cloud/buffer-cloud.github.io`. `.github/workflows/pages.yml` builds, verifies, and publishes `dist/` through GitHub Actions. No additional secrets or dependencies are required. GitHub Pages source is configured as GitHub Actions.
 
-For another static host, use `npm run build` as the build command and `dist` as the output directory. Relative asset links support subdirectory hosting.
+For another static host, use `npm run build` and output directory `dist`. All page and asset links are relative.
 
-This repository does not contain deployment credentials. GitHub Actions receives only the permissions required to publish Pages.
+## Accessibility
 
-## Design and accessibility
-
-Dark canvas, restrained lime accent, large engineering visuals, thin separators, and minimal navigation. Desktop project images use modest scroll-linked scale/translation where supported. Mobile uses ordinary document flow. Reduced-motion preferences disable animations and smooth scrolling; unsupported engines receive a static fallback. Native `details` elements keep case studies keyboard accessible, with visible focus and a skip link.
-
-The layout borrows the broad idea of full-height visual sections from TJ Watson and project-first structure from Jacob Schwartz. No proprietary source code or assets from those sites are included.
+Single native link per project tile, decorative SVG icons, visible keyboard focus, skip links, descriptive image alternatives, selectable code text, and reduced-motion support. Desktop gallery uses two columns; mobile uses one. Project pages provide All Projects and Next Project navigation. Card labels disclose opening in a new tab.
 
 ## Evidence boundaries
 
-Report photographs and screenshots come from Amlesh's IIT Hyderabad final report. Research architecture is labeled as proposed. The public PPS firmware generates simulated readings; it is not evidence of calibrated regulator measurements or closed-loop power control. Multi-node sine waves are generated test data, not measured sensor signals or proof of hardware synchronization.
+Report images come from Amlesh's IIT Hyderabad final report. STM32 research is ongoing and its architecture is proposed. The public PPS firmware generates simulated readings. Multi-node sine waves are generated data, not measured signals or proof of hardware synchronization. No physical hardware tests are invented.
 
-PCB design verification and fabrication outputs are documented in the MCU-Datalogger repository. Electrical rule checks do not establish assembled hardware performance. No physical bring-up, sensing accuracy, or hardware testing is invented.
+## MCU Data Logger Rev A
 
-## MCU Data Logger Rev A deliverables
+- `dist/assets/board-render.png`: actual KiCad render.
+- `dist/assets/gerber-view.png`: top/bottom composite from exported Gerber and drill geometry.
+- `dist/assets/MCU-Datalogger-RevA.zip`: fabrication layers, separate drill files, maps, notes and checksums.
 
-- `dist/assets/board-render.png`: final KiCad board render.
-- `dist/assets/gerber-view.png`: top/bottom composite from actual Gerber and drill geometry.
-- `dist/assets/MCU-Datalogger-RevA.zip`: fabrication layers, plated/non-plated drill files, drill maps, manufacturing notes and checksums.
+KiCad 9 reports **0 DRC violations, 0 unconnected pads, 0 footprint/parity errors; schematic ERC 0 errors and 0 warnings**. The board has 29 footprints, 426 segments, 39 vias and a filled B.Cu GND zone.
 
-Final KiCad 9 checks: **0 DRC violations, 0 unconnected pads, 0 footprint/parity errors; schematic ERC 0 errors and 0 warnings**. The board has 29 footprints, 426 track segments, 39 vias, and a filled B.Cu GND zone. Board SHA-256: `32f1db545f157f0b93e7d78371c2de28a021b1edc808a5e332d3afcea9e4f804`.
-
-The finished design remains on `pcb-reva-layout` in [buffer-cloud/MCU-Datalogger](https://github.com/buffer-cloud/MCU-Datalogger/tree/pcb-reva-layout); it is not merged into main. Firmware, assembly and physical bring-up remain unverified.
+Finished CAD is on [pcb-reva-layout](https://github.com/buffer-cloud/MCU-Datalogger/tree/pcb-reva-layout), commit `81d5e552573d87ffdf10b55c19ad52d68e6a7219`. Firmware, assembly and physical bring-up remain unverified.

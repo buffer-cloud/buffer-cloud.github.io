@@ -32,3 +32,12 @@ Hardware photographs and application screenshots remain faithful to the original
 - PPS/PV work is presented as interface/communications prototyping. It is not a claim of calibrated sensor accuracy, solar efficiency, or physical closed-loop control.
 - Multi-node signals are mathematically generated sine waves. Concurrent connections are not proof of synchronized hardware clocks. The report records priority acceptance/rejection, but provides no validated latency benchmark.
 - PCB electrical checks and fabrication exports are design evidence. Board assembly, firmware, and bench bring-up are separate and remain unverified.
+
+## Code snapshot provenance
+
+Snapshots render genuine source excerpts with file and line numbers; no IDE state or executed result is implied. Full text is retained alongside the image for accessibility.
+
+- `assets/code/data-logger.png`: `MCU Datalogger.kicad_pcb`, lines 11350–11369, commit `81d5e552573d87ffdf10b55c19ad52d68e6a7219`. Actual B.Cu GND zone CAD; not firmware.
+- `assets/code/power-interfaces.png`: `lib/pps_window.dart`, lines 230–235, commit `446a9af38055577b6ffffd74f24c85f498628051`. Bounded chart-history update; companion readings are simulated.
+- `assets/code/networked-nodes.png`: supplied internship `sketch_jun25a.ino`, lines 191–197. File SHA-256 `706f6579fb1779da702572009e5be5c3cb71f477f72395ff33eedc047a2680e8`. Single-node JSON/WebSocket transport building block documented alongside multi-node experiments. No public source URL is invented.
+- STM32H7: no verified firmware source was available; its proposed architecture is used instead.

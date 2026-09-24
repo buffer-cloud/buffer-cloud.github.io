@@ -1,14 +1,14 @@
 # Verification record
 
-- Static build and JavaScript syntax checks passed.
-- All local image/resume links and internal anchors resolve; no duplicate IDs.
-- Four case studies are rendered into HTML and remain available without JavaScript.
-- Independent recruiter/content review checked claims against supplied report, resume, development plan, and GitHub source.
-- Desktop (1280 and 1440 pixels), mobile (390 pixels), and narrow mobile (320 pixels) reviewed in browser.
-- A 320-pixel image-container overflow and diagram-caption overlap were found and corrected; final document width equals viewport width.
-- Project navigation and native case-study expansion tested.
-- Browser console showed no errors/warnings during review.
-- Contrast audit passed for primary, secondary, and accent text; visible focus, skip link, native details, and reduced-motion CSS are present.
-- Scroll animation is guarded by CSS feature support and disabled for reduced-motion users. Mobile does not use parallax.
+The portfolio is now a six-page static site: icon gallery homepage, About/Experience, and four dedicated project pages.
 
-PCB verification is reported separately in the hardware repository and its generated check reports. No physical hardware testing was performed for this website task.
+- Build and JavaScript syntax checks pass.
+- Cross-page link/anchor validation covers all six HTML files and local assets.
+- Homepage contains four native project links and no detailed case-study bodies.
+- Project cards open dedicated pages in a new tab as requested; Back to Projects and Next Project links are provided.
+- Code snapshots are genuine source excerpts, with selectable text and provenance; STM32 has an explicitly proposed architecture because no verified firmware was found.
+- Independent source review checked the code excerpts and original report image provenance.
+- Keyboard focus, skip links, semantic headings, decorative icon accessibility, native code disclosures, and reduced-motion CSS remain available.
+- Responsive desktop/mobile visual review is completed before publication.
+
+PCB checks remain documented in the hardware repository. No physical hardware testing was performed or invented.
