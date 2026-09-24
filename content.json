@@ -1,0 +1,142 @@
+{
+  "projects": [
+    {
+      "id": "data-logger",
+      "number": "01",
+      "title": "MCU Data Logger",
+      "intro": "An ATmega328P data-logging board with dual I\u00b2C EEPROMs and a real-time clock. A compact two-layer design, from schematic to fabrication package.",
+      "tags": [
+        "ATmega328P",
+        "KiCad \u00b7 2 layers",
+        "EEPROM \u00b7 RTC"
+      ],
+      "status": "Rev A layout complete \u00b7 electrical checks passed",
+      "image": "assets/board-render.png",
+      "caption": "Rev A \u00b7 KiCad render of the final routed board \u00b7 hardware bring-up pending",
+      "repo": "https://github.com/buffer-cloud/MCU-Datalogger/tree/pcb-reva-layout",
+      "sections": [
+        {
+          "title": "The challenge",
+          "text": "Develop a compact microcontroller board with nonvolatile storage, timekeeping, accessible interfaces, and programming connections for future data-logging firmware."
+        },
+        {
+          "title": "Engineering work",
+          "text": "ATmega328P-AUR in TQFP-32, two 24LC1025 I\u00b2C EEPROMs, a DS1337 RTC, and separate 16 MHz and 32.768 kHz crystals. UART, I\u00b2C, GPIO, and a 2\u00d73 ISP header expose the development interfaces in an approximately 52.1 \u00d7 34.9 mm two-layer board."
+        },
+        {
+          "title": "Verification",
+          "text": "KiCad reports zero DRC violations, zero unconnected pads, zero footprint/parity errors, and zero schematic ERC errors or warnings. The final board includes a filled B.Cu ground zone, explicit manufacturing rules, and wider power traces where clearance permits."
+        },
+        {
+          "title": "Design completion & next steps",
+          "text": "Gerber and drill files are generated from the verified board. This is a hardware CAD and fabrication package; firmware development, board assembly, power-up checks, and physical performance testing remain bring-up work."
+        }
+      ],
+      "detailImage": "assets/gerber-view.png",
+      "detailCaption": "Final top and bottom fabrication views, rendered from exported Gerber and Excellon files. Bottom view is mirrored for viewing from the back.",
+      "download": "assets/MCU-Datalogger-RevA.zip"
+    },
+    {
+      "id": "photoacoustic",
+      "number": "02",
+      "title": "STM32H7<br>photoacoustics.",
+      "intro": "An STM32H7 acquisition platform for pulsed-LED photoacoustic tomography. Research into the timing, buffering, and interfaces behind useful signals.",
+      "tags": [
+        "STM32H7",
+        "ADC \u00b7 DMA",
+        "Timer-triggered acquisition"
+      ],
+      "status": "Iowa State University \u00b7 ongoing research",
+      "diagram": true,
+      "caption": "Development architecture \u00b7 proposed data path, not a validated end-to-end system",
+      "sections": [
+        {
+          "title": "Research context",
+          "text": "Developing a microcontroller-based acquisition platform for pulsed-LED photoacoustic tomography at Iowa State University, working with Prof. Manojit Pramanik."
+        },
+        {
+          "title": "My focus",
+          "text": "Timer-triggered ADC sampling, DMA-to-RAM buffering, memory organization, and peripheral integration. The design work explores how timing and data movement constrain an embedded acquisition pipeline."
+        },
+        {
+          "title": "System direction",
+          "text": "The development plan connects STM32H7 acquisition to a planned ESP32 gateway and host interface. MCU selection and end-to-end integration remain development decisions."
+        },
+        {
+          "title": "Current evidence",
+          "text": "Ongoing research documented in my resume and development plan. No completed tomography reconstruction, measured throughput, or end-to-end hardware validation is claimed here."
+        }
+      ]
+    },
+    {
+      "id": "power-interfaces",
+      "number": "03",
+      "title": "Power systems.<br>Human interfaces.",
+      "intro": "ESP32 display and Flutter prototypes for power-system telemetry. From a wired bench display to a mobile interface for monitoring and commands.",
+      "tags": [
+        "ESP32",
+        "Flutter / Dart",
+        "BLE \u00b7 WebSockets"
+      ],
+      "status": "IIT Hyderabad \u00b7 internship prototypes",
+      "image": "assets/power-bench.jpeg",
+      "secondary": "assets/pps-interface.png",
+      "caption": "Original IIT Hyderabad report photograph and PPS Monitor screenshot",
+      "repo": "https://github.com/buffer-cloud/bluetooth_web_pv_pps",
+      "sections": [
+        {
+          "title": "The challenge",
+          "text": "Make power-system information usable on small embedded screens and mobile devices: clear values, responsive graphs, and accessible controls across different communication paths."
+        },
+        {
+          "title": "My contribution",
+          "text": "Built ESP32 TFT interfaces with selective redraw, debounced buttons, scrolling graph buffers, and touch calibration. Developed Flutter views for telemetry, graphing, and command interactions."
+        },
+        {
+          "title": "Implementation",
+          "text": "The report describes W5500 Ethernet, Bluetooth Classic, BLE, and later Wi-Fi variants. The public Flutter code implements BLE discovery, WebSocket transport, six-field telemetry parsing, rolling plots, and control messages."
+        },
+        {
+          "title": "Evidence & limits",
+          "text": "The public ESP32 firmware generates simulated readings and logs received commands. It demonstrates communications and interface behavior, not calibrated power measurements or physical closed-loop regulation. The touchscreen prototype also used a potentiometer as an analog input."
+        }
+      ],
+      "detailImage": "assets/pps-graph.png",
+      "detailCaption": "Original report screenshot: PPS Monitor graph interface. Displayed values are not presented as independently verified measurements."
+    },
+    {
+      "id": "networked-nodes",
+      "number": "04",
+      "title": "Many nodes.<br>One clear view.",
+      "intro": "Multi-node ESP32 and W5500 experiments in concurrent streaming, Flutter visualization, and priority-based message selection.",
+      "tags": [
+        "W5500 Ethernet",
+        "WebSockets",
+        "JSON \u00b7 Flutter"
+      ],
+      "status": "IIT Hyderabad \u00b7 report-documented demonstrations",
+      "image": "assets/multi-node.png",
+      "caption": "Original report photograph of the multi-node plotting interface",
+      "sections": [
+        {
+          "title": "Concurrent data streams",
+          "text": "Expanded a two-node visualizer to support four independent ESP32 WebSocket connections. Each node sends a mathematically generated sine wave, with a separate graph and connection state in Flutter."
+        },
+        {
+          "title": "My contribution",
+          "text": "Managed independent WebSocket listeners, per-device plotting and status, bounded data handling, and CSV recording/export. Generated waveforms exercise the communications path; they are not measured sensor signals."
+        },
+        {
+          "title": "Priority messaging",
+          "text": "A separate experiment used three ESP32 senders and one receiver with W5500 Ethernet. The receiver parsed sender IDs and accepted messages from the highest-priority sender."
+        },
+        {
+          "title": "Reported result",
+          "text": "The internship report records successful sender connections, acceptance of ESP1 messages, and rejection of ESP2/ESP3 messages. It does not establish hardware clock synchronization or a measured latency benchmark."
+        }
+      ],
+      "detailImage": "assets/priority-messages.png",
+      "detailCaption": "Original internship report screenshot: priority messaging code and serial output."
+    }
+  ]
+}
