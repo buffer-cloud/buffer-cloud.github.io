@@ -1,5 +1,7 @@
 # Amlesh Sahoo — Engineering Portfolio
 
+Live website: **https://buffer-cloud.github.io/**
+
 A lightweight, responsive engineering portfolio built with semantic HTML, custom CSS, and small progressive-enhancement JavaScript. Four expandable case studies connect original project evidence to specific engineering contributions.
 
 ## Run locally
@@ -28,9 +30,11 @@ After edits, run `npm run build && npm run lint`. Image links are checked along 
 
 ## Deploy
 
-Upload the contents of `dist/` to any static host (GitHub Pages, Cloudflare Pages, Netlify, or equivalent). Use `npm run build` as the build command and `dist` as the output directory. No server functions, secrets, account system, or environment variables are required. Relative asset links support subdirectory hosting.
+The public website is hosted on **GitHub Pages**. Push changes to `main` in `buffer-cloud/buffer-cloud.github.io`; `.github/workflows/pages.yml` builds and verifies the site, then publishes `dist/`. Repository Settings → Pages uses GitHub Actions as its source. No extra secrets or dependencies are required.
 
-The `.openai/hosting.json` manifest records the private Sites project. Its access settings must be deliberately changed before using a private deployment as a public recruiting link. This repository does not contain deployment credentials.
+For another static host, use `npm run build` as the build command and `dist` as the output directory. Relative asset links support subdirectory hosting.
+
+This repository does not contain deployment credentials. GitHub Actions receives only the permissions required to publish Pages.
 
 ## Design and accessibility
 
