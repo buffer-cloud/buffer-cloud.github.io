@@ -2,7 +2,7 @@
 
 Live website: **https://buffer-cloud.github.io/**
 
-A lightweight static portfolio with a four-project icon gallery, dedicated project pages, and a separate About/Experience page. Each project card opens its own page in a new tab. Project pages include an overview, original imagery, source-backed code snapshots where available, verification status, and source/download links.
+An off-white, animated static portfolio with a four-project icon gallery, dedicated project pages, and a separate About/Experience page. Each project card opens its own page in a new tab. Project pages include an overview, original imagery, source-backed code snapshots where available, verification status, and source/download links.
 
 ## Run locally
 
@@ -14,13 +14,14 @@ npm run lint
 npm start
 ```
 
-Open http://127.0.0.1:4173. Set `PORT` to change the preview port. The committed `dist/` directory is directly deployable and needs no client-side JavaScript.
+Open http://127.0.0.1:4173. Set `PORT` to change the preview port. The committed `dist/` directory is directly deployable and remains readable without client-side JavaScript; a small optional script adds animation.
 
 ## Edit and build
 
 - `content.json`: project descriptions, evidence labels, code excerpts, image paths and source links.
 - `build.mjs`: page templates, project icons, navigation, and static page generation.
-- `dist/style.css`: responsive dark visual system.
+- `dist/style.css`: responsive off-white visual system.
+- `dist/motion.js`: optional scroll and interaction animation; honors reduced motion.
 - `dist/index.html`: generated project gallery homepage.
 - `dist/projects/*.html`: generated dedicated project pages.
 - `dist/about.html`: generated background, experience and technical practice page.
@@ -39,11 +40,11 @@ For another static host, use `npm run build` and output directory `dist`. All pa
 
 ## Accessibility
 
-Single native link per project tile, decorative SVG icons, visible keyboard focus, skip links, descriptive image alternatives, selectable code text, and reduced-motion support. Desktop gallery uses two columns; mobile uses one. Project pages provide All Projects and Next Project navigation. Card labels disclose opening in a new tab.
+Single native link per project tile, decorative SVG icons, visible keyboard focus, skip links, descriptive image alternatives, selectable code text, and reduced-motion support. Animated circuit artwork, staggered entrances, scroll reveals, card interactions and light parallax are optional enhancements; the footer includes a Pause animation control. Desktop gallery uses two columns; mobile uses one. Project pages provide All Projects and Next Project navigation. Card labels disclose opening in a new tab.
 
 ## Evidence boundaries
 
-Report images come from Amlesh's IIT Hyderabad final report. STM32 research is ongoing and its architecture is proposed. The public PPS firmware generates simulated readings. Multi-node sine waves are generated data, not measured signals or proof of hardware synchronization. No physical hardware tests are invented.
+Report images come from Amlesh's IIT Hyderabad final report. STM32 research is ongoing and its architecture is proposed. The public PPS firmware generates simulated readings. The four-ESP32/W5500 dashboard displays generated sine waves, not measured signals or proof of hardware synchronization. No physical hardware tests are invented.
 
 ## MCU Data Logger Rev A
 

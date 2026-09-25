@@ -131,48 +131,50 @@
     {
       "id": "networked-nodes",
       "number": "04",
-      "title": "Many nodes.<br>One clear view.",
-      "intro": "Multi-node ESP32 and W5500 experiments in concurrent streaming, Flutter visualization, and priority-based message selection.",
+      "title": "Four ESP32s.<br>One dashboard.",
+      "intro": "Four ESP32 boards, each connected through W5500 Ethernet, stream generated waveforms into one Flutter dashboard. Independent connections, four graph panels, and per-device recording.",
       "tags": [
-        "W5500 Ethernet",
-        "WebSockets",
-        "JSON \u00b7 Flutter"
+        "4 \u00d7 ESP32 + W5500",
+        "Ethernet \u00b7 WebSockets",
+        "Flutter \u00b7 CSV"
       ],
       "status": "IIT Hyderabad \u00b7 report-documented demonstrations",
-      "image": "assets/multi-node.png",
-      "caption": "Original report photograph of the multi-node plotting interface",
+      "image": "assets/four-node-upper.png",
+      "caption": "Original report photographs of the four-panel Flutter dashboard: upper and lower views. Each graph belongs to an independent ESP32/W5500 connection.",
       "sections": [
         {
-          "title": "Concurrent data streams",
-          "text": "Expanded a two-node visualizer to support four independent ESP32 WebSocket connections. Each node sends a mathematically generated sine wave, with a separate graph and connection state in Flutter."
+          "title": "Four independent data streams",
+          "text": "Built a Flutter visualizer supporting four ESP32 boards with W5500 Ethernet modules. Each board runs its own WebSocket server on port 81 and streams mathematically generated sine-wave data to a separate graph."
         },
         {
           "title": "My contribution",
-          "text": "Managed independent WebSocket listeners, per-device plotting and status, bounded data handling, and CSV recording/export. Generated waveforms exercise the communications path; they are not measured sensor signals."
+          "text": "Maintained four independent WebSocketChannel instances with separate listeners, editable device IPs, connection status, and a CustomPainter graph per ESP32. Added per-device recording and clipboard-based CSV export. Generated waveforms exercise communication and visualization; they are not measured sensor signals."
         },
         {
-          "title": "Priority messaging",
-          "text": "A separate experiment used three ESP32 senders and one receiver with W5500 Ethernet. The receiver parsed sender IDs and accepted messages from the highest-priority sender."
+          "title": "Another four-board experiment",
+          "text": "The report also documents four ESP32 boards and four W5500 modules arranged as three senders and one receiver. Sender IDs determine priority, with ESP1 ranked above ESP2 and ESP3."
         },
         {
-          "title": "Reported result",
-          "text": "The internship report records successful sender connections, acceptance of ESP1 messages, and rejection of ESP2/ESP3 messages. It does not establish hardware clock synchronization or a measured latency benchmark."
+          "title": "Report evidence",
+          "text": "The report documents the four-channel dashboard and records successful sender connections and priority-based acceptance/rejection in the separate messaging experiment. It does not establish hardware clock synchronization, fault-tolerant failover, or a validated latency benchmark."
         }
       ],
       "detailImage": "assets/priority-messages.png",
       "detailCaption": "Original internship report screenshot: priority messaging code and serial output.",
       "codeSnapshots": [
         {
-          "file": "sketch_jun25a.ino",
-          "language": "cpp",
-          "code": "    // Send WebSocket data\n    char payload[128];\n    snprintf(payload, sizeof(payload), \"{\\\"time\\\":%.2f,\\\"value\\\":%.2f,\\\"kbps\\\":%.2f}\", \n             time_sec, sineVal, tx_speed_kbps);\n    \n    wsServer.broadcast(payload);\n    bytesSent += strlen(payload);",
-          "image": "assets/code/networked-nodes.png",
-          "caption": "Original internship firmware excerpt: package generated waveform values as JSON, broadcast them over WebSocket, and count payload bytes. This is the single-node transport building block documented alongside the multi-node experiments.",
+          "file": "IIT Hyderabad report \u2014 Flutter UI Snapshot",
+          "language": "dart",
+          "code": "WebSocketChannel.connect(Uri.parse('ws://192.168.0.101:81'));\nWebSocketChannel.connect(Uri.parse('ws://192.168.0.102:81'));\nWebSocketChannel.connect(Uri.parse('ws://192.168.0.103:81'));\nWebSocketChannel.connect(Uri.parse('ws://192.168.0.104:81'));",
+          "image": "assets/code/four-node-connections.png",
+          "caption": "Exact four-connection Dart excerpt from the internship report\u2019s Multi-ESP32 section. Illustrative connection addresses are reproduced from the report; this excerpt is documentation, not a complete Flutter application.",
           "source": null,
-          "startLine": 191,
-          "endLine": 197
+          "startLine": 135,
+          "endLine": 138,
+          "locationLabel": "Report paragraphs 135\u2013138"
         }
-      ]
+      ],
+      "secondary": "assets/four-node-lower.png"
     }
   ]
 }
