@@ -9,7 +9,8 @@ for(const [file,html] of Object.entries(contents)){
  assert.equal(new Set(ids).size,ids.length,`Duplicate ids in ${file}`);
  for(const [,url] of html.matchAll(/(?:src|href)="([^"]+)"/g)){
   if(/^(https?:|mailto:)/.test(url))continue;
-  const [pathname,hash]=url.split('#');
+  const [resource,hash]=url.split('#');
+  const pathname=resource.split('?')[0];
   const target=pathname?path.resolve(root,path.dirname(file),pathname):path.join(root,file);
   assert(target.startsWith(root+path.sep),`Path outside output: ${url}`);
   assert(fs.existsSync(target),`Missing resource ${url} in ${file}`);
