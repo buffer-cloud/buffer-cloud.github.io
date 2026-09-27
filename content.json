@@ -4,7 +4,7 @@
       "id": "data-logger",
       "number": "01",
       "title": "MCU Data Logger",
-      "intro": "An ATmega328P data-logging board with dual I\u00b2C EEPROMs and a real-time clock. A compact two-layer design, from schematic to fabrication package.",
+      "intro": "Designed a two-layer ATmega328P board with dual I\u00b2C EEPROMs, real-time clock, and programming interfaces. Routed and checked in KiCad; fabrication outputs prepared.",
       "tags": [
         "ATmega328P",
         "KiCad \u00b7 2 layers",
@@ -51,8 +51,8 @@
     {
       "id": "photoacoustic",
       "number": "02",
-      "title": "STM32H7<br>photoacoustics.",
-      "intro": "An STM32H7 acquisition platform for pulsed-LED photoacoustic tomography. Research into the timing, buffering, and interfaces behind useful signals.",
+      "title": "STM32H7 Photoacoustic Acquisition System",
+      "intro": "Designing an STM32H7 acquisition architecture for pulsed-LED photoacoustic tomography, with timer-triggered ADC sampling, DMA-to-memory buffering, and a planned ESP32 gateway.",
       "tags": [
         "STM32H7",
         "ADC \u00b7 DMA",
@@ -83,8 +83,8 @@
     {
       "id": "power-interfaces",
       "number": "03",
-      "title": "Power systems.<br>Human interfaces.",
-      "intro": "ESP32 display and Flutter prototypes for power-system telemetry. From a wired bench display to a mobile interface for monitoring and commands.",
+      "title": "Power-System Monitoring Interfaces",
+      "intro": "Built ESP32 display and Flutter interface prototypes for power-system telemetry, combining touch controls, rolling plots, BLE, and WebSocket communication.",
       "tags": [
         "ESP32",
         "Flutter / Dart",
@@ -131,8 +131,8 @@
     {
       "id": "networked-nodes",
       "number": "04",
-      "title": "Four ESP32s.<br>One dashboard.",
-      "intro": "Four ESP32 boards, each connected through W5500 Ethernet, stream generated waveforms into one Flutter dashboard. Independent connections, four graph panels, and per-device recording.",
+      "title": "Multi-Node ESP32 Ethernet Telemetry",
+      "intro": "Four ESP32 nodes with W5500 Ethernet stream generated waveforms to a four-panel Flutter interface, with independent WebSocket connections and per-device CSV recording.",
       "tags": [
         "4 \u00d7 ESP32 + W5500",
         "Ethernet \u00b7 WebSockets",

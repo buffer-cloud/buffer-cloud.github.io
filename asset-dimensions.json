@@ -1,0 +1,46 @@
+{
+  "assets/four-node-upper.png": [
+    849,
+    702
+  ],
+  "assets/priority-messages.png": [
+    1379,
+    484
+  ],
+  "assets/pps-interface.png": [
+    983,
+    1994
+  ],
+  "assets/power-bench.jpeg": [
+    1152,
+    1536
+  ],
+  "assets/board-render.png": [
+    2384,
+    1568
+  ],
+  "assets/four-node-lower.png": [
+    782,
+    702
+  ],
+  "assets/pps-graph.png": [
+    983,
+    2130
+  ],
+  "assets/gerber-view.png": [
+    2600,
+    1180
+  ],
+  "assets/code/power-interfaces.png": [
+    1100,
+    380
+  ],
+  "assets/code/data-logger.png": [
+    1108,
+    940
+  ],
+  "assets/code/four-node-connections.png": [
+    1200,
+    310
+  ]
+}

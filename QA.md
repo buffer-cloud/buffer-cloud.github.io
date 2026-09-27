@@ -1,23 +1,30 @@
-# Verification record
+# Verification record — September 25, 2026
 
-The portfolio is now a six-page static site: icon gallery homepage, About/Experience, and four dedicated project pages.
+Six static pages: homepage, About/Experience, and four dedicated project pages. The warm ivory/green palette and existing fonts are preserved.
 
-- Build and JavaScript syntax checks pass.
-- Cross-page link/anchor validation covers all six HTML files and local assets.
-- Homepage contains four native project links and no detailed case-study bodies.
-- Project cards open dedicated pages in a new tab as requested; Back to Projects and Next Project links are provided.
-- Code snapshots are genuine source excerpts, with selectable text and provenance; STM32 has an explicitly proposed architecture because no verified firmware was found.
-- Independent source review checked the code excerpts and original report image provenance.
-- Keyboard focus, skip links, semantic headings, decorative icon accessibility, native code disclosures, and reduced-motion CSS remain available.
-- Responsive desktop/mobile visual review is completed before publication.
+## Automated checks
 
-PCB checks remain documented in the hardware repository. No physical hardware testing was performed or invented.
+- Build and JavaScript syntax checks.
+- All six pages: relative assets and cross-page fragments, unique IDs and h1, semantic landmarks, labeled navigation, image alternatives and intrinsic dimensions.
+- Same-tab local navigation, protected external new-tab links, canonical URLs, page metadata, favicon, touch icon, and social image.
+- Accessible selectable code, ongoing-research/simulated-data qualifications, both four-device report photographs.
+- Motion state tests: operating-system preferences, compact screens, manual pause/resume, persistence, storage failure, content visibility.
 
-## Off-white redesign and four-device case
+## Visual and interaction checks
 
-- Warm off-white theme with animated circuit artwork, entrances, scroll reveals, card interactions and progress indicator.
-- Desktop 1280px and mobile 390px visual review completed; no horizontal overflow on the mobile four-device case.
-- Native project-card interaction opens the dedicated four-ESP32/W5500 case in a new tab.
-- Keyboard activation verified the Pause/Resume animation control and code-text disclosure.
-- Independent review verified reduced-motion and no-JavaScript visibility, source qualifications, image alternatives and links.
-- Four-board case uses both original dashboard photographs and the report’s exact four-connection excerpt; the earlier two-node presentation is removed.
+- Desktop 1280px, tablet 768px, and mobile 320/375/430px.
+- Warm hero, quieter circuit, featured project hierarchy, natural title wrapping, and usable navigation without horizontal page scrolling.
+- GitHub profile, both project repositories, and public resume returned HTTP 200. LinkedIn blocked automated retrieval (HTTP 999); the existing resume-verified profile URL is preserved.
+- Keyboard activation of same-tab project links and persistent pause/resume; fragment navigation and native code disclosure.
+- Navigation links have 44px minimum touch height. Skip link and visible keyboard focus remain available.
+- Primary, muted, and accent text pass normal-text AA contrast. Muted text stays opaque (at least 4.56:1 on actual surfaces).
+
+## Independent review
+
+Separate scoped UI, engineering benchmark, content, motion, performance/accessibility, and final QA reviews were used. Final source QA found no blocking issue from hardware-recruiter, embedded-engineer, researcher, or general-recruiter perspectives. Browser checks were performed separately by the coordinator.
+
+## Limits and optional follow-up
+
+Original report images remain unchanged; project pages are image-rich. The 1.65MB PCB render could later have a smaller responsive derivative while retaining the original. Fonts load from Google Fonts with preconnect and font-display swap; system fallbacks remain available. This is a source/browser audit, not a claimed Lighthouse score or assistive-technology certification.
+
+No hardware assembly or physical testing was performed. Leadership activities and Cadence proficiency were omitted because the reviewed sources did not establish them. The STM32 gateway remains planned, generated network waveforms are labeled, and simulated power readings are not presented as calibrated measurements.
