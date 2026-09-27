@@ -42,7 +42,7 @@ For another static host, use `npm run build` and output directory `dist`. All pa
 
 ## Accessibility
 
-Single native link per project tile, decorative SVG icons, visible keyboard focus, skip links, descriptive image alternatives, selectable code text, and reduced-motion support. Animated circuit artwork, staggered entrances, scroll reveals and restrained card interactions are optional enhancements; the footer includes a Pause animation control. Desktop uses a full-width flagship, two secondary cards, and a full-width network project; mobile uses one column. Project pages provide All Projects and Next Project navigation. Motion automatically reduces on screens up to 700px and when the operating system requests reduced motion. The manual pause preference persists between pages.
+Single native link per project tile, decorative SVG icons, visible keyboard focus, skip links, descriptive image alternatives, selectable code text, and reduced-motion support. Animated circuit artwork, staggered entrances, scroll reveals, gentle desktop parallax and restrained card interactions are optional enhancements; the footer includes a Pause animation control. Desktop uses a full-width flagship, two secondary cards, and a full-width network project; mobile uses one column. Project pages provide All Projects and Next Project navigation. Mobile keeps gentle circuit motion and short reveals, with parallax limited to desktop. Motion stops when the operating system requests reduced motion. The manual pause preference persists between pages.
 
 ## Evidence boundaries
 

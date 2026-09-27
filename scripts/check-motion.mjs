@@ -13,9 +13,14 @@ function page({ reduced = false, width = 1200, storage = new Map(), storageFails
     return { add: value => values.add(value), contains: value => values.has(value),
       toggle: (value, enabled) => enabled ? values.add(value) : values.delete(value) };
   };
+  const style = () => ({ setProperty(key, value) { this[key] = value; }, removeProperty(key) { delete this[key]; } });
   const targets = Array.from({ length: 2 }, () => ({
-    classList: classes(), getBoundingClientRect: () => ({ top: 2000 }),
+    classList: classes(), style: style(), matches: selector => selector === '.project-tile', getBoundingClientRect: () => ({ top: 2000 }),
   }));
+  targets.forEach(target => { target.parentElement = { querySelectorAll: () => targets }; });
+  const hero = { style: style() };
+  const frames = new Map();
+  let frameId = 0;
   const button = { hidden: true, setAttribute(key, value) { this[key] = value; },
     addEventListener(key, callback) { this[key] = callback; } };
   const progress = { style: {}, setAttribute() {} };
@@ -34,7 +39,7 @@ function page({ reduced = false, width = 1200, storage = new Map(), storageFails
       queries.set(query, media);
       return media;
     },
-    document: { querySelector: () => button, querySelectorAll: () => targets,
+    document: { querySelector: selector => selector === '.hero-circuit' ? hero : button, querySelectorAll: () => targets,
       createElement: () => progress, documentElement: { scrollHeight: 3000 }, body },
     localStorage: {
       getItem(key) { if (storageFails) throw Error('Storage unavailable'); return storage.get(key) ?? null; },
@@ -42,12 +47,15 @@ function page({ reduced = false, width = 1200, storage = new Map(), storageFails
     },
     IntersectionObserver, window: { IntersectionObserver },
     innerHeight: 800, innerWidth: width, scrollY: 0,
-    requestAnimationFrame: () => 1, cancelAnimationFrame() {},
+    requestAnimationFrame: callback => { frames.set(++frameId, callback); return frameId; }, cancelAnimationFrame(id) { frames.delete(id); },
     addEventListener: (event, callback) => events.set(event, callback),
   };
   vm.runInNewContext(source, context);
   return {
-    button, targets, progress, events,
+    button, targets, progress, events, hero,
+    frame() { const pending = [...frames.values()]; frames.clear(); pending.forEach(callback => callback()); },
+    scroll(value) { context.scrollY = value; events.get('scroll')(); },
+    intersect() { observer.callback(targets.map(target => ({ target, isIntersecting: true }))); },
     paused: () => body.classList.contains('motion-paused'),
     visible: () => targets.every(target => target.classList.contains('is-visible')),
     disconnected: () => observer?.disconnected,
@@ -66,14 +74,28 @@ assert(test.paused() && test.visible(), 'OS preference changes must reveal all c
 
 for (const width of [320, 700]) {
   test = page({ width });
-  assert(test.paused() && test.visible(), `Motion must reduce at ${width}px`);
+  assert(!test.paused() && !test.button.hidden, `Aesthetic motion and pause control remain available at ${width}px`);
+  test.scroll(800);
+  test.frame();
+  assert.equal(test.hero.style.transform, 'translateY(0px)', 'Mobile disables only hero parallax');
+  test.button.click();
+  assert(test.paused() && test.visible(), 'Mobile pause must reveal all content');
 }
 test = page({ width: 701 });
-assert(!test.paused(), 'Desktop motion begins above 700px');
+test.scroll(800);
+test.frame();
+assert.equal(test.hero.style.transform, 'translateY(24px)', 'Desktop parallax must be bounded');
+assert.equal(test.targets[1].style['--reveal-delay'], '80ms', 'Project cards use restrained stagger');
 test.change(compactQuery, true);
-assert(test.paused() && test.visible() && test.disconnected(), 'Entering mobile must stop pending reveals');
+test.frame();
+assert(!test.paused(), 'Entering mobile must retain aesthetic motion');
+assert.equal(test.hero.style.transform, 'translateY(0px)', 'Entering mobile resets parallax');
+test.intersect();
+assert(test.visible(), 'Observed content becomes visible');
 test.change(compactQuery, false);
 assert(!test.paused() && test.visible(), 'Leaving mobile must never hide revealed content again');
+test.button.click();
+assert.equal(test.hero.style.transform, undefined, 'Pausing clears hero parallax');
 
 const storage = new Map();
 test = page({ storage });
@@ -99,4 +121,4 @@ for (const event of ['hashchange', 'beforeprint']) {
   test.events.get(event)();
   assert(test.visible(), `${event} must expose all content`);
 }
-console.log('Motion checks passed: OS/mobile preferences, pause persistence, storage fallback, and content visibility.');
+console.log('Motion checks passed: OS preferences, mobile motion, bounded parallax, pause persistence, storage fallback, and content visibility.');

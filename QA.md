@@ -8,7 +8,7 @@ Six static pages: homepage, About/Experience, and four dedicated project pages. 
 - All six pages: relative assets and cross-page fragments, unique IDs and h1, semantic landmarks, labeled navigation, image alternatives and intrinsic dimensions.
 - Same-tab local navigation, protected external new-tab links, canonical URLs, page metadata, favicon, touch icon, and social image.
 - Accessible selectable code, ongoing-research/simulated-data qualifications, both four-device report photographs.
-- Motion state tests: operating-system preferences, compact screens, manual pause/resume, persistence, storage failure, content visibility.
+- Motion state tests: operating-system preferences, mobile animation, bounded desktop parallax, manual pause/resume, persistence, storage failure, content visibility.
 
 ## Visual and interaction checks
 
@@ -28,3 +28,7 @@ Separate scoped UI, engineering benchmark, content, motion, performance/accessib
 Original report images remain unchanged; project pages are image-rich. The 1.65MB PCB render could later have a smaller responsive derivative while retaining the original. Fonts load from Google Fonts with preconnect and font-display swap; system fallbacks remain available. This is a source/browser audit, not a claimed Lighthouse score or assistive-technology certification.
 
 No hardware assembly or physical testing was performed. Leadership activities and Cadence proficiency were omitted because the reviewed sources did not establish them. The STM32 gateway remains planned, generated network waveforms are labeled, and simulated power readings are not presented as calibrated measurements.
+
+## Aesthetic motion restoration
+
+Circuit motion, brief mobile reveals, staggered cards, and gentle desktop parallax are restored. Desktop parallax is capped at 24px; mobile has no parallax. Browser inspection confirmed the mobile orbit advances and the visible pause control stops it. Reduced-motion and persistent manual pause remain supported. Independent motion review and updated state tests pass.

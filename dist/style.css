@@ -106,6 +106,7 @@ em {
   transition:color .25s;
 }
 .text-link span {
+  transition:transform .3s var(--ease);
   color:var(--accent);
 }
 figcaption {
@@ -272,6 +273,9 @@ nav a[aria-current] {
   align-items:center;
   gap:24px;
 }
+.primary-cta span {
+  transition:transform .3s var(--ease);
+}
 .resume-link {
   color:var(--muted);
   font-size:14px;
@@ -285,7 +289,7 @@ nav a[aria-current] {
   right:4vw;
   top:65px;
   z-index:0;
-  opacity:.55;
+  opacity:.65;
   pointer-events:none;
 }
 .hero-circuit svg {
@@ -399,6 +403,7 @@ nav a[aria-current] {
   font-size:11px;
 }
 .project-icon {
+  transition:transform .4s var(--ease);
   width:60px;
   height:60px;
   display:grid;
@@ -919,6 +924,12 @@ footer {
     transform:translateY(-3px);
     color:var(--fg);
   }
+  .project-tile:hover .project-icon,.project-tile:focus-visible .project-icon {
+    transform:translateY(-2px) rotate(-3deg);
+  }
+  .text-link:hover span,.primary-cta:hover span {
+    transform:translateX(3px);
+  }
   .project-tile:hover .tile-arrow {
     transform:translate(2px,-2px);
     color:var(--accent);
@@ -958,6 +969,9 @@ footer {
 .motion-paused *,.motion-paused *:before,.motion-paused *:after {
   animation:none!important;
   transition:none!important;
+}
+.motion-paused .project-tile:hover,.motion-paused .project-tile.reveal-ready.is-visible:hover,.motion-paused .hero-circuit,.motion-paused .project-icon,.motion-paused .tile-arrow,.motion-paused .text-link span,.motion-paused .primary-cta span {
+  transform:none!important;
 }
 .motion-paused .reveal-ready {
   opacity:1;
@@ -1291,14 +1305,6 @@ footer {
   .reveal-ready {
     transform:translateY(10px);
   }
-  .gallery-hero>.eyebrow,.gallery-hero h1,.gallery-hero .hero-bottom,.project-page-heading,.circuit-orbit,.circuit-traces,.chip-wave {
-    animation:none;
-  }
-  .reveal-ready {
-    opacity:1;
-    transform:none;
-    transition:none;
-  }
   .scroll-progress {
     display:none;
   }
@@ -1316,7 +1322,7 @@ footer {
     opacity:1;
     transform:none;
   }
-  .project-tile:hover,.project-tile.reveal-ready.is-visible:hover,.tile-arrow,.hero-circuit {
+  .project-tile:hover,.project-tile.reveal-ready.is-visible:hover,.tile-arrow,.hero-circuit,.project-icon,.text-link span,.primary-cta span {
     transform:none!important;
   }
   .scroll-progress {

@@ -2,6 +2,7 @@
 (() => {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const compactScreen = matchMedia('(max-width: 700px)');
+  const heroCircuit = document.querySelector('.hero-circuit');
   const toggle = document.querySelector('.motion-toggle');
   const targets = [...document.querySelectorAll('.project-tile, .home-about, .contact, .case-page-body > div, .project-gallery, .detail-code, .about-experience, .education, .detail-visual')];
   const storageKey = 'portfolio-motion-paused';
@@ -25,17 +26,21 @@
     const range = document.documentElement.scrollHeight - innerHeight;
     const fraction = range > 0 ? Math.max(0, Math.min(1, scrollY / range)) : 0;
     progress.style.transform = `scaleX(${fraction})`;
+    if (heroCircuit) {
+      const offset = compactScreen.matches ? 0 : Math.min(24, Math.max(0, scrollY) * 0.045);
+      heroCircuit.style.transform = `translateY(${offset}px)`;
+    }
   };
   const requestProgress = () => {
     if (!paused && !frame) frame = requestAnimationFrame(updateProgress);
   };
   const applyPreference = () => {
-    const automaticPause = reducedMotion.matches || compactScreen.matches;
+    const automaticPause = reducedMotion.matches;
     paused = manualPause || automaticPause;
     document.body.classList.toggle('motion-paused', paused);
     progress.hidden = paused;
     if (toggle) {
-      // System and compact-screen preferences take precedence over this control.
+      // Respect the operating system; mobile visitors keep the same pause control.
       toggle.hidden = automaticPause;
       toggle.setAttribute('aria-pressed', String(manualPause));
       toggle.textContent = manualPause ? 'Resume animation' : 'Pause animation';
@@ -43,6 +48,7 @@
     if (paused) {
       cancelAnimationFrame(frame);
       frame = 0;
+      heroCircuit?.style.removeProperty('transform');
       showContent();
     } else {
       requestProgress();
@@ -59,6 +65,10 @@
       });
     }, { threshold: 0.08 });
     targets.forEach(target => {
+      if (target.matches('.project-tile')) {
+        const cards = [...target.parentElement.querySelectorAll('.project-tile')];
+        target.style.setProperty('--reveal-delay', `${(cards.indexOf(target) % 2) * 80}ms`);
+      }
       // Do not hide anything visible on load, including fragment destinations.
       if (target.getBoundingClientRect().top < innerHeight) return;
       target.classList.add('reveal-ready');
