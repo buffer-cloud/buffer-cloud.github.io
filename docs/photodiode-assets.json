@@ -1,0 +1,50 @@
+{
+  "sourceRepository": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32",
+  "sourceCommit": "701e282d3440408446555f829263162e5f198007",
+  "assets": [
+    {
+      "file": "assets/projects/photodiode-tia/schematic.webp",
+      "width": 2819,
+      "height": 2109,
+      "bytes": 131304,
+      "sha256": "36e699d8982f17b287262875d7613fdd45b7c87b8ad93aea6f8a6ce5f6651952",
+      "source": "hardware/kicad/photodiode-tia-esp32.kicad_sch",
+      "sourceURL": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/blob/701e282d3440408446555f829263162e5f198007/hardware/kicad/photodiode-tia-esp32.kicad_sch",
+      "method": "KiCad 9 schematic SVG export, rasterized and cropped to content; geometry and labels unchanged.",
+      "classification": "DESIGNED \u2014 UNMANUFACTURED"
+    },
+    {
+      "file": "assets/projects/photodiode-tia/pcb-top.webp",
+      "width": 1500,
+      "height": 1126,
+      "bytes": 77542,
+      "sha256": "ca254b3c2c2f33578d7b5eb44ec9ec4e5ac8c5613d4be6aa867eff81c2b71f83",
+      "source": "hardware/manufacturing/rev-a/exports/",
+      "sourceURL": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/tree/701e282d3440408446555f829263162e5f198007/hardware/manufacturing/rev-a/exports/",
+      "method": "Gerbonara parses actual top copper, mask, silk and Excellon drills; layer-mask compositing, no geometry invented.",
+      "classification": "DESIGNED \u2014 UNMANUFACTURED"
+    },
+    {
+      "file": "assets/projects/photodiode-tia/gerber-overview.webp",
+      "width": 2200,
+      "height": 1030,
+      "bytes": 197764,
+      "sha256": "106a03ef6418ca3e95b0eee994ae73b99daa0c272bb3d85d638da9f4ce62c9e0",
+      "source": "hardware/manufacturing/rev-a/exports/",
+      "sourceURL": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/tree/701e282d3440408446555f829263162e5f198007/hardware/manufacturing/rev-a/exports/",
+      "method": "Same real fabrication layer rendering, with mirrored bottom, neutral canvas and explanatory labels.",
+      "classification": "DESIGNED \u2014 UNMANUFACTURED"
+    },
+    {
+      "file": "assets/projects/photodiode-tia/simulation-response.webp",
+      "width": 1300,
+      "height": 585,
+      "bytes": 38858,
+      "sha256": "48ee5eafdabc6056ca2085e4adb2920a9b2e820832ee9f2cee2ed506d7e4f0e7",
+      "source": "simulation/plots/02_ac_transimpedance.png",
+      "sourceURL": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/blob/701e282d3440408446555f829263162e5f198007/simulation/plots/02_ac_transimpedance.png",
+      "method": "Lossless conversion of existing repository LTspice plot; plotted data unchanged.",
+      "classification": "SIMULATED"
+    }
+  ]
+}

@@ -46,3 +46,18 @@ Snapshots render genuine source excerpts with file and line numbers; no IDE stat
 ## Four-device case study correction
 
 The report explicitly specifies four ESP32 devices with W5500 Ethernet (paragraphs 117–124), four independent listeners (150–153), and four graph panels (131). Its two photographs show the upper and lower portions of that four-panel display and remain unaltered. The portfolio omits the earlier two-device development stage. The separate priority-messaging experiment also uses four ESP32 boards and four W5500 modules (234–235), configured as three senders and one receiver. “W5500” follows the report’s actual component name.
+
+## Photodiode TIA & Wireless Optical Sensor
+
+Source: [buffer-cloud/Photodiode-TIA-ESP32](https://github.com/buffer-cloud/Photodiode-TIA-ESP32/tree/701e282d3440408446555f829263162e5f198007), commit `701e282d3440408446555f829263162e5f198007`. Technical copy follows the design contract, analog gate, implementation verification and fabrication release records at that revision. The ESP32 is external to the 60 × 45 mm analog board; BPW34 remains the provisional detector.
+
+| Website asset | Actual source | Evidence type |
+|---|---|---|
+| `schematic.webp` | Native KiCad schematic exported as SVG, rasterized and trimmed | Designed schematic |
+| `pcb-top.webp` | Gerbonara rendering of released copper, mask, silk and Excellon drills | Unmanufactured PCB design |
+| `gerber-overview.webp` | Same exports, top plus mirrored bottom | Unmanufactured fabrication layers |
+| `simulation-response.webp` | Existing `simulation/plots/02_ac_transimpedance.png`, lossless WebP conversion | LTspice simulation |
+
+Only these four rendered images are published under `dist/assets/projects/photodiode-tia/`. No schematic/PCB source, vendor model, temporary render or bench photograph is copied. Geometry and plotted data were not invented. Source paths, dimensions and hashes are recorded in `docs/photodiode-assets.json`.
+
+The firmware excerpt reproduces `firmware/esp32/src/acquisition.cpp` lines 49–58. Firmware build, seven Python tests, synthetic smoke check and ERC/DRC/parity results are repository-recorded checks dated September 29, 2026. They do not establish physical sample timing, throughput or analog performance. The bandwidth and phase-margin values are explicitly simulated. Fabrication-ready refers to a bare-board prototype; procurement, component qualification, assembly and hardware characterization remain pending.

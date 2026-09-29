@@ -42,5 +42,21 @@
   "assets/code/four-node-connections.png": [
     1200,
     310
+  ],
+  "assets/projects/photodiode-tia/schematic.webp": [
+    2819,
+    2109
+  ],
+  "assets/projects/photodiode-tia/pcb-top.webp": [
+    1500,
+    1126
+  ],
+  "assets/projects/photodiode-tia/gerber-overview.webp": [
+    2200,
+    1030
+  ],
+  "assets/projects/photodiode-tia/simulation-response.webp": [
+    1300,
+    585
   ]
 }
