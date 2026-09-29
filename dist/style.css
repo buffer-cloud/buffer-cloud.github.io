@@ -469,6 +469,39 @@ nav a[aria-current] {
   padding:8px 0;
   min-height:40px;
 }
+.project-tile.has-thumbnail {
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+  column-gap:40px;
+  align-items:start;
+}
+.has-thumbnail>.tile-top {
+  grid-column:1/-1;
+}
+.has-thumbnail>.project-icon,.has-thumbnail>.tile-kicker,.has-thumbnail>h3,.has-thumbnail>p,.has-thumbnail>.tile-status,.has-thumbnail>.tile-link {
+  grid-column:1;
+}
+.has-thumbnail>.tile-link {
+  justify-self:start;
+}
+.tile-thumbnail {
+  grid-column:2;
+  grid-row:2/9;
+  align-self:center;
+  width:100%;
+  padding:18px;
+  margin:24px 0;
+  border:1px solid var(--line);
+  border-radius:5px;
+  background:var(--bg);
+}
+.tile-thumbnail img {
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:350px;
+  object-fit:contain;
+}
 /* 7. Project pages */
 .project-page,.about-page {
   padding:0 5vw 65px;
@@ -568,6 +601,40 @@ nav a[aria-current] {
 .case-page-body p {
   font-size:17px;
 }
+.project-architecture {
+  padding-top:60px;
+}
+.project-architecture h2 {
+  font-size:26px;
+  margin-bottom:25px;
+}
+.project-architecture p {
+  color:var(--muted);
+  max-width:880px;
+}
+.system-flow {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px;
+  padding:0;
+  margin:28px 0 0;
+  list-style:none;
+}
+.system-flow li {
+  padding:20px;
+  border-top:1px solid var(--line);
+  background:var(--surface);
+}
+.system-flow strong {
+  display:block;
+  margin-top:12px;
+  font-size:18px;
+  font-weight:500;
+}
+.project-architecture .architecture-caption {
+  margin-top:20px;
+  font-size:14px;
+}
 .project-gallery,.detail-code {
   padding-top:60px;
 }
@@ -576,6 +643,7 @@ nav a[aria-current] {
   margin-bottom:25px;
 }
 .detail-gallery img {
+  height:auto;
   display:block;
   width:auto;
   max-height:720px;
@@ -1140,6 +1208,30 @@ footer {
   }
   .project-tile.featured {
     min-height:380px;
+  }
+  .project-tile.has-thumbnail {
+    display:flex;
+  }
+  .tile-thumbnail {
+    margin:0 0 18px;
+    padding:12px;
+  }
+  .tile-thumbnail img {
+    max-height:280px;
+  }
+  .system-flow {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+  .system-flow li {
+    padding:14px;
+  }
+  .system-flow strong {
+    font-size:16px;
+    overflow-wrap:anywhere;
+  }
+  .project-architecture {
+    padding-top:35px;
   }
   .project-tile h3 {
     font-size:28px;

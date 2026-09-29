@@ -49,8 +49,152 @@
       ]
     },
     {
-      "id": "photoacoustic",
+      "id": "photodiode-tia",
       "number": "02",
+      "title": "Photodiode TIA & Wireless Optical Sensor",
+      "intro": "Designed a selectable-gain photodiode front end, two-layer PCB, and ESP32-to-Python acquisition pipeline, supported by LTspice simulation and software checks.",
+      "tags": [
+        "Analog \u00b7 LTspice",
+        "KiCad \u00b7 2 layers",
+        "ESP32 \u00b7 Python"
+      ],
+      "status": "Rev A design, simulation, PCB & software complete",
+      "cardMeta": [
+        "LIGHT TO DATA",
+        "Fabrication-ready prototype design \u00b7 unmanufactured"
+      ],
+      "image": "assets/projects/photodiode-tia/pcb-top.webp",
+      "thumbnail": "assets/projects/photodiode-tia/pcb-top.webp",
+      "caption": "Rev A top view rendered from actual Gerber and drill files. Design visualization; the board has not been manufactured.",
+      "imageAlt": "Gerber-derived top view of the 60 by 45 mm photodiode TIA PCB, showing gain links, routing, pads and the external ESP32 connector.",
+      "thumbnailAlt": "Actual top fabrication-layer render of the Photodiode TIA board.",
+      "repo": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32",
+      "sections": [
+        {
+          "title": "Overview",
+          "text": "Convert photodiode current into a usable voltage, then carry the samples through embedded acquisition, wireless telemetry, and host-side analysis. The BPW34 is the provisional reference detector; the ESP32 DevKit connects through a cable header rather than being fitted to the analog PCB."
+        },
+        {
+          "title": "Analog front end",
+          "text": "OPA2320 amplifiers provide the transimpedance stage, buffered 1.65 V reference, and filter followers. Three paired feedback selections\u201410 k\u03a9 / 1 nF, 100 k\u03a9 / 100 pF, and 1 M\u03a9 / 10 pF\u2014set the gain and compensation. A TPS7A2033PDBVR regulator supplies the analog rail; a series resistor and BAT54S clamp protect the ADC input."
+        },
+        {
+          "title": "Simulation & validation",
+          "text": "SIMULATED in LTspice using the TI OPAx320 model: approximately 15.9 kHz TIA bandwidth and 309.5 Hz conditioned-system bandwidth. Nominal phase margins are 79.4\u00b0, 85.5\u00b0, and 90.4\u00b0 across the selected gains. The analog design gate passed; these are model results, not hardware measurements."
+        },
+        {
+          "title": "PCB design",
+          "text": "The 60 \u00d7 45 mm two-layer layout keeps the photodiode/TIA input path short, clusters the feedback pairs, and excludes copper pour around sensitive summing and feedback nodes. Repository verification records clean ERC, DRC, connectivity, and schematic/PCB parity, plus a complete BOM and Gerber/drill package for bare-board prototype fabrication."
+        },
+        {
+          "title": "Firmware",
+          "text": "ESP32 ADC1 / GPIO34 acquisition is driven by a hardware timer and buffered separately from WebSocket telemetry. Firmware is configured for 4 kS/s by default, with sample-loss accounting and timestamps. The pinned PlatformIO build passed; actual sampling timing and wireless throughput have not been verified on hardware."
+        },
+        {
+          "title": "Python analysis",
+          "text": "Host tools provide waveform viewing, CSV recording, FFT, dark/no-signal noise analysis, and gain/frequency-response workflows. Seven offline tests and a synthetic capture-to-FFT smoke check are recorded as passing on September 29, 2026. Synthetic data validates software behavior; it is not measured optical performance."
+        },
+        {
+          "title": "Project status",
+          "text": "DESIGN / SIMULATION / PCB / SOFTWARE COMPLETE. Revision A is fabrication-ready as a bare-board prototype. Hardware characterization: Not yet performed. Component qualification, assembly, ADC calibration, and bench validation remain the next steps."
+        }
+      ],
+      "gallery": [
+        {
+          "image": "assets/projects/photodiode-tia/schematic.webp",
+          "title": "Actual KiCad schematic",
+          "caption": "Exported from the revision-controlled KiCad schematic: power, reference, selectable feedback network, filtering and ADC protection.",
+          "alt": "Actual KiCad schematic showing the BPW34, OPA2320 TIA, three RF/CF pairs, reference, filter followers and BAT54S ADC clamp."
+        },
+        {
+          "image": "assets/projects/photodiode-tia/gerber-overview.webp",
+          "title": "Fabrication layers",
+          "caption": "Actual copper, mask, front silkscreen and drill exports. Bottom view is mirrored; the back silkscreen is intentionally empty. Colors are a technical visualization, not a photograph.",
+          "alt": "Top and mirrored bottom Gerber views of the unmanufactured Rev A PCB, including routing, copper planes, pads and drill holes."
+        },
+        {
+          "image": "assets/projects/photodiode-tia/simulation-response.webp",
+          "title": "LTspice AC response",
+          "caption": "SIMULATED closed-loop transimpedance for all three gain settings, before and after analog conditioning. Existing repository plot using the TI OPAx320 vendor model; no measured data.",
+          "alt": "LTspice simulated transimpedance curves for 10 kilohm, 100 kilohm and 1 megohm gain settings, with TIA output and conditioned ADC response."
+        }
+      ],
+      "resources": [
+        {
+          "label": "LTspice simulation",
+          "url": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/tree/main/simulation"
+        },
+        {
+          "label": "KiCad design",
+          "url": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/tree/main/hardware/kicad"
+        },
+        {
+          "label": "ESP32 firmware",
+          "url": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/tree/main/firmware/esp32"
+        },
+        {
+          "label": "Python analysis",
+          "url": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/tree/main/software/python"
+        },
+        {
+          "label": "Fabrication package",
+          "url": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/tree/main/hardware/manufacturing/rev-a"
+        }
+      ],
+      "codeSnapshots": [
+        {
+          "file": "firmware/esp32/src/acquisition.cpp",
+          "language": "C++",
+          "code": "void configureTimerAlarm(uint32_t hz) {\n  // 40 MHz timer ticks avoid microsecond rounding at arbitrary rates.\n  timerAlarmWrite(g_timer, (40000000ULL + hz / 2) / hz, true);\n}\n\nvoid IRAM_ATTR onTimerAlarm() {\n  BaseType_t highTaskAwoken = pdFALSE;\n  vTaskNotifyGiveFromISR(g_acqTaskHandle, &highTaskAwoken);\n  if (highTaskAwoken) portYIELD_FROM_ISR();\n}",
+          "caption": "Actual firmware source: timer period setup and the interrupt that wakes the acquisition task. Successful compilation does not establish measured sample timing.",
+          "source": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/blob/701e282d3440408446555f829263162e5f198007/firmware/esp32/src/acquisition.cpp#L49-L58",
+          "startLine": 49,
+          "endLine": 58,
+          "locationLabel": "C++ \u00b7 lines 49\u201358"
+        }
+      ],
+      "architecture": {
+        "title": "System architecture",
+        "steps": [
+          {
+            "label": "01 / OPTICAL INPUT",
+            "title": "Light \u2192 BPW34"
+          },
+          {
+            "label": "02 / CURRENT TO VOLTAGE",
+            "title": "Selectable-gain TIA"
+          },
+          {
+            "label": "03 / CONDITIONING",
+            "title": "Filtering + protection"
+          },
+          {
+            "label": "04 / DIGITIZATION",
+            "title": "ESP32 ADC1 / GPIO34"
+          },
+          {
+            "label": "05 / SAMPLING",
+            "title": "Timer + sample buffer"
+          },
+          {
+            "label": "06 / TRANSPORT",
+            "title": "WebSocket telemetry"
+          },
+          {
+            "label": "07 / HOST SOFTWARE",
+            "title": "Python analysis"
+          },
+          {
+            "label": "08 / DATA",
+            "title": "Waveform \u00b7 CSV \u00b7 FFT"
+          }
+        ],
+        "caption": "Designed signal chain. Firmware and offline software checks passed; end-to-end hardware characterization has not yet been performed."
+      }
+    },
+    {
+      "id": "photoacoustic",
+      "number": "03",
       "title": "STM32H7 Photoacoustic Acquisition System",
       "intro": "Designing an STM32H7 acquisition architecture for pulsed-LED photoacoustic tomography, with timer-triggered ADC sampling, DMA-to-memory buffering, and a planned ESP32 gateway.",
       "tags": [
@@ -82,7 +226,7 @@
     },
     {
       "id": "power-interfaces",
-      "number": "03",
+      "number": "04",
       "title": "Power-System Monitoring Interfaces",
       "intro": "Built ESP32 display and Flutter interface prototypes for power-system telemetry, combining touch controls, rolling plots, BLE, and WebSocket communication.",
       "tags": [
@@ -130,7 +274,7 @@
     },
     {
       "id": "networked-nodes",
-      "number": "04",
+      "number": "05",
       "title": "Multi-Node ESP32 Ethernet Telemetry",
       "intro": "Four ESP32 nodes with W5500 Ethernet stream generated waveforms to a four-panel Flutter interface, with independent WebSocket connections and per-device CSV recording.",
       "tags": [

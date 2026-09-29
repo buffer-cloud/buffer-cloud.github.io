@@ -48,7 +48,7 @@ for(const [file,html] of Object.entries(contents)){
  assert(html.includes('class="skip" href="#main"'),`Missing keyboard skip link in ${file}`);
  assert(!/\/Users\/|localhost:|127\.0\.0\.1|password\s*=/i.test(html),`Private/local content in ${file}`);
 }
-assert.equal((contents['index.html'].match(/class="project-tile /g)||[]).length,4);
+assert.equal((contents['index.html'].match(/class="project-tile /g)||[]).length,5);
 for(const [tile] of contents['index.html'].matchAll(/<a\b[^>]*class="project-tile [^"]*"[^>]*>/g)){
  assert(!/\btarget="_blank"/.test(tile),'Internal project cards must stay in the same tab');
  assert(/href="projects\/[^"#]+\.html"/.test(tile),'Project card must link to a dedicated case study');
@@ -58,16 +58,26 @@ assert(contents['projects/power-interfaces.html'].includes('simulated readings')
 assert(contents['projects/photoacoustic.html'].includes('ongoing research'));
 assert(contents['projects/photoacoustic.html'].includes('No verified firmware source'));
 for(const [file,html] of Object.entries(contents).filter(([f])=>f.startsWith('projects/'))){
- if(html.includes('class="code-snapshot"'))assert(html.includes('Read accessible code text'),`Code screenshot needs selectable text in ${file}`);
+ if(html.includes('class="code-snapshot"'))assert(html.includes('<pre><code>'),`Code screenshot needs selectable text in ${file}`);
 }
 const network=contents['projects/networked-nodes.html'];
 assert(/four ESP32/i.test(network)&&network.includes('W5500'),'Four ESP32/W5500 project missing');
 assert(network.includes('four-node-upper.png')&&network.includes('four-node-lower.png'),'Both original four-panel dashboard views must remain visible');
 assert(network.includes('not measured sensor signals'),'Generated-waveform evidence limit missing');
 assert(!Object.values(contents).some(html=>/\b(?:two|2)[- ]node\b/i.test(html)),'Obsolete two-node project content remains');
+const photodiode=contents['projects/photodiode-tia.html'];
+assert(photodiode, 'Photodiode case study missing');
+assert(/BPW34/.test(photodiode)&&/OPA2320/.test(photodiode),'Analog signal-chain details missing');
+assert(/simulat/i.test(photodiode)&&/hardware characterization/i.test(photodiode)&&/not yet performed/i.test(photodiode),'Simulation and hardware-status distinction missing');
+assert(/schematic/i.test(photodiode)&&/pcb-top|gerber/i.test(photodiode),'Required design visuals missing');
+assert(photodiode.includes('github.com/buffer-cloud/Photodiode-TIA-ESP32'),'Engineering source link missing');
+for(const name of fs.readdirSync(path.join(root,'assets/projects/photodiode-tia'))){
+ assert(/\.(svg|png|webp|jpe?g)$/.test(name),`Unexpected source or temporary file in project assets: ${name}`);
+ assert(fs.statSync(path.join(root,'assets/projects/photodiode-tia',name)).size<2_000_000,`Project asset needs optimization: ${name}`);
+}
 const css=fs.readFileSync(path.join(root,'style.css'),'utf8');
 assert(/prefers-reduced-motion\s*:\s*reduce/.test(css),'Reduced-motion style support missing');
 assert(/:focus-visible/.test(css),'Visible keyboard-focus styling missing');
 assert(/color-scheme\s*:\s*light/.test(css),'Off-white/light theme missing');
-assert.equal(files.length,6);
-console.log('Verified six pages, same-tab project navigation, metadata, landmarks, image dimensions, assets, anchors, code snapshots and evidence labels.');
+assert.equal(files.length,7);
+console.log('Verified seven pages, same-tab project navigation, metadata, landmarks, image dimensions, assets, anchors, code snapshots and evidence labels.');

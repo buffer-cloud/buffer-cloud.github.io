@@ -32,3 +32,12 @@ No hardware assembly or physical testing was performed. Leadership activities an
 ## Aesthetic motion restoration
 
 Circuit motion, brief mobile reveals, staggered cards, and gentle desktop parallax are restored. Desktop parallax is capped at 24px; mobile has no parallax. Browser inspection confirmed the mobile orbit advances and the visible pause control stops it. Reduced-motion and persistent manual pause remain supported. Independent motion review and updated state tests pass.
+
+## Photodiode TIA integration — September 29, 2026
+
+- Five Work cards and seven pages; the new project is placed immediately after the existing flagship without changing the other project order. Existing warm styles, fonts, navigation and animation behavior are preserved.
+- Four website-ready WebP assets total 445,468 bytes (~435 KiB): real schematic, Gerber-derived top view, top/bottom fabrication overview, and existing LTspice AC plot. Provenance and hashes are in `docs/photodiode-assets.json`.
+- Independent final QA found no content/source blockers. All claims match engineering commit `701e282d3440408446555f829263162e5f198007`; simulation, configured sample rate, software verification, and pending hardware characterization are distinguished.
+- New card and detail page reviewed at desktop 1280px, tablet 768px and mobile widths. No horizontal page overflow; native keyboard image navigation and source links checked. No browser console errors observed.
+- Repository, simulation, KiCad, firmware, Python, fabrication and pinned source-excerpt links all returned HTTP 200.
+- The engineering repository remains unchanged. Only rendered visuals were copied; no vendor model, source design file, credentials or temporary render files are published.

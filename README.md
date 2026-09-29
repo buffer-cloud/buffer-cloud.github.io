@@ -2,7 +2,7 @@
 
 Live website: **https://buffer-cloud.github.io/**
 
-An off-white, animated static portfolio with a four-project icon gallery, dedicated project pages, and a separate About/Experience page. Internal project links stay in the same tab. The MCU Data Logger is the featured starting point. Project pages include an overview, original imagery, source-backed code snapshots where available, verification status, and source/download links.
+An off-white, animated static portfolio with a five-project gallery, dedicated project pages, and a separate About/Experience page. Internal project links stay in the same tab. The MCU Data Logger is the featured starting point. Project pages include an overview, original imagery, source-backed code snapshots where available, verification status, and source/download links.
 
 ## Run locally
 
@@ -30,7 +30,7 @@ Open http://127.0.0.1:4173. Set `PORT` to change the preview port. The committed
 - `dist/assets/`: original report imagery, resume, PCB outputs and rendered code snapshots.
 - `SOURCES.md`: evidence provenance and limitations.
 
-Edit the templates/data, then run `npm run build && npm run lint`. Verification covers all six pages, relative asset links, cross-page anchors, same-tab navigation, semantic landmarks, sharing metadata, image dimensions, motion states, and evidence qualifications. Generated HTML is committed so the website remains readable without a framework or JavaScript.
+Edit the templates/data, then run `npm run build && npm run lint`. Verification covers all seven pages, relative asset links, cross-page anchors, same-tab navigation, semantic landmarks, sharing metadata, image dimensions, motion states, and evidence qualifications. Generated HTML is committed so the website remains readable without a framework or JavaScript.
 
 Code snapshots are faithful formatted excerpts, with source filenames/line numbers and original-source links where available. Each PNG also has accessible selectable code text on its project page. Original report screenshots remain unchanged. No verified STM32 firmware was available, so that page uses an explicitly proposed architecture instead of a fabricated code image.
 
@@ -42,7 +42,7 @@ For another static host, use `npm run build` and output directory `dist`. All pa
 
 ## Accessibility
 
-Single native link per project tile, decorative SVG icons, visible keyboard focus, skip links, descriptive image alternatives, selectable code text, and reduced-motion support. Animated circuit artwork, staggered entrances, scroll reveals, gentle desktop parallax and restrained card interactions are optional enhancements; the footer includes a Pause animation control. Desktop uses a full-width flagship, two secondary cards, and a full-width network project; mobile uses one column. Project pages provide All Projects and Next Project navigation. Mobile keeps gentle circuit motion and short reveals, with parallax limited to desktop. Motion stops when the operating system requests reduced motion. The manual pause preference persists between pages.
+Single native link per project tile, decorative SVG icons, visible keyboard focus, skip links, descriptive image alternatives, selectable code text, and reduced-motion support. Animated circuit artwork, staggered entrances, scroll reveals, gentle desktop parallax and restrained card interactions are optional enhancements; the footer includes a Pause animation control. Desktop uses a full-width flagship, two secondary cards, a prominent photodiode TIA project with a real PCB thumbnail, and a full-width network project; mobile uses one column. Project pages provide All Projects and Next Project navigation. Mobile keeps gentle circuit motion and short reveals, with parallax limited to desktop. Motion stops when the operating system requests reduced motion. The manual pause preference persists between pages.
 
 ## Evidence boundaries
 
@@ -57,3 +57,9 @@ Report images come from Amlesh's IIT Hyderabad final report. STM32 research is o
 KiCad 9 reports **0 DRC violations, 0 unconnected pads, 0 footprint/parity errors; schematic ERC 0 errors and 0 warnings**. The board has 29 footprints, 426 segments, 39 vias and a filled B.Cu GND zone.
 
 Finished CAD is on [pcb-reva-layout](https://github.com/buffer-cloud/MCU-Datalogger/tree/pcb-reva-layout), commit `81d5e552573d87ffdf10b55c19ad52d68e6a7219`. Firmware, assembly and physical bring-up remain unverified.
+
+## Photodiode TIA project
+
+The new case study is `dist/projects/photodiode-tia.html`. Four compact images in `dist/assets/projects/photodiode-tia/` come from the actual KiCad schematic, fabrication outputs and LTspice results at engineering revision `701e282d3440408446555f829263162e5f198007`. `docs/photodiode-assets.json` records dimensions, source paths and SHA-256 hashes. Reusable optional `thumbnail`, `gallery`, `architecture`, `resources` and `cardMeta` fields in `content.json` integrate it with the existing templates.
+
+Revision A is a fabrication-ready bare-board prototype design. It has not been manufactured or physically characterized. Firmware/software checks and simulation results do not imply measured analog performance.
