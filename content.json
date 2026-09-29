@@ -64,10 +64,8 @@
         "Fabrication-ready prototype design \u00b7 unmanufactured"
       ],
       "image": "assets/projects/photodiode-tia/pcb-top.webp",
-      "thumbnail": "assets/projects/photodiode-tia/pcb-top.webp",
       "caption": "Rev A top view rendered from actual Gerber and drill files. Design visualization; the board has not been manufactured.",
       "imageAlt": "Gerber-derived top view of the 60 by 45 mm photodiode TIA PCB, showing gain links, routing, pads and the external ESP32 connector.",
-      "thumbnailAlt": "Actual top fabrication-layer render of the Photodiode TIA board.",
       "repo": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32",
       "sections": [
         {
