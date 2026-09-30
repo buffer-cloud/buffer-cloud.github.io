@@ -4,15 +4,15 @@
       "id": "data-logger",
       "number": "01",
       "title": "MCU Data Logger",
-      "intro": "Designed a two-layer ATmega328P board with dual I\u00b2C EEPROMs, real-time clock, and programming interfaces. Routed and checked in KiCad; fabrication outputs prepared.",
+      "intro": "Designed a two-layer ATmega328P board with dual I²C EEPROMs, real-time clock, and programming interfaces. Routed and checked in KiCad; fabrication outputs prepared.",
       "tags": [
         "ATmega328P",
-        "KiCad \u00b7 2 layers",
-        "EEPROM \u00b7 RTC"
+        "KiCad · 2 layers",
+        "EEPROM · RTC"
       ],
-      "status": "Rev A layout complete \u00b7 electrical checks passed",
+      "status": "Rev A layout complete · electrical checks passed",
       "image": "assets/board-render.png",
-      "caption": "Rev A \u00b7 KiCad render of the final routed board \u00b7 hardware bring-up pending",
+      "caption": "Rev A · KiCad render of the final routed board · hardware bring-up pending",
       "repo": "https://github.com/buffer-cloud/MCU-Datalogger/tree/pcb-reva-layout",
       "sections": [
         {
@@ -21,7 +21,7 @@
         },
         {
           "title": "Engineering work",
-          "text": "ATmega328P-AUR in TQFP-32, two 24LC1025 I\u00b2C EEPROMs, a DS1337 RTC, and separate 16 MHz and 32.768 kHz crystals. UART, I\u00b2C, GPIO, and a 2\u00d73 ISP header expose the development interfaces in an approximately 52.1 \u00d7 34.9 mm two-layer board."
+          "text": "ATmega328P-AUR in TQFP-32, two 24LC1025 I²C EEPROMs, a DS1337 RTC, and separate 16 MHz and 32.768 kHz crystals. UART, I²C, GPIO, and a 2×3 ISP header expose the development interfaces in an approximately 52.1 × 34.9 mm two-layer board."
         },
         {
           "title": "Verification",
@@ -46,7 +46,49 @@
           "startLine": 11350,
           "endLine": 11369
         }
-      ]
+      ],
+      "summary": [
+        {
+          "label": "Purpose",
+          "text": "Timestamped, nonvolatile acquisition hardware."
+        },
+        {
+          "label": "My contribution",
+          "text": "Schematic, two-layer routing, design checks and fabrication package."
+        },
+        {
+          "label": "Tools",
+          "text": "ATmega328P · 24LC1025 · DS1337 · KiCad"
+        },
+        {
+          "label": "Validation",
+          "text": "ERC / DRC and connectivity passed. Firmware, assembly and bring-up pending."
+        }
+      ],
+      "decisions": [
+        {
+          "title": "Timestamped storage",
+          "problem": "A compact logger needs storage and timekeeping interfaces.",
+          "decision": "Pair the ATmega328P with dual I²C EEPROMs and a DS1337 RTC.",
+          "evidence": "The schematic, routed board and fabrication outputs document the hardware design; logging firmware remains future work."
+        },
+        {
+          "title": "A board ready for fabrication",
+          "problem": "Routing must preserve connectivity and meet manufacturing rules.",
+          "decision": "Use two layers, a filled B.Cu GND zone and explicit design rules.",
+          "evidence": "KiCad reports zero DRC violations and zero unconnected pads; Gerber and drill outputs are available."
+        }
+      ],
+      "card": {
+        "title": "MCU Data Logger",
+        "description": "A two-layer acquisition-board design with timestamping and nonvolatile storage.",
+        "labels": [
+          "ATmega328P",
+          "EEPROM / RTC",
+          "KiCad"
+        ],
+        "status": "CAD verified · bring-up pending"
+      }
     },
     {
       "id": "photodiode-tia",
@@ -54,15 +96,11 @@
       "title": "Photodiode TIA & Wireless Optical Sensor",
       "intro": "Designed a selectable-gain photodiode front end, two-layer PCB, and ESP32-to-Python acquisition pipeline, supported by LTspice simulation and software checks.",
       "tags": [
-        "Analog \u00b7 LTspice",
-        "KiCad \u00b7 2 layers",
-        "ESP32 \u00b7 Python"
+        "Analog · LTspice",
+        "KiCad · 2 layers",
+        "ESP32 · Python"
       ],
       "status": "Rev A design, simulation, PCB & software complete",
-      "cardMeta": [
-        "LIGHT TO DATA",
-        "Fabrication-ready prototype design \u00b7 unmanufactured"
-      ],
       "image": "assets/projects/photodiode-tia/pcb-top.webp",
       "caption": "Rev A top view rendered from actual Gerber and drill files. Design visualization; the board has not been manufactured.",
       "imageAlt": "Gerber-derived top view of the 60 by 45 mm photodiode TIA PCB, showing gain links, routing, pads and the external ESP32 connector.",
@@ -74,15 +112,15 @@
         },
         {
           "title": "Analog front end",
-          "text": "OPA2320 amplifiers provide the transimpedance stage, buffered 1.65 V reference, and filter followers. Three paired feedback selections\u201410 k\u03a9 / 1 nF, 100 k\u03a9 / 100 pF, and 1 M\u03a9 / 10 pF\u2014set the gain and compensation. A TPS7A2033PDBVR regulator supplies the analog rail; a series resistor and BAT54S clamp protect the ADC input."
+          "text": "OPA2320 amplifiers provide the transimpedance stage, buffered 1.65 V reference, and filter followers. Three paired feedback selections—10 kΩ / 1 nF, 100 kΩ / 100 pF, and 1 MΩ / 10 pF—set the gain and compensation. A TPS7A2033PDBVR regulator supplies the analog rail; a series resistor and BAT54S clamp protect the ADC input."
         },
         {
           "title": "Simulation & validation",
-          "text": "SIMULATED in LTspice using the TI OPAx320 model: approximately 15.9 kHz TIA bandwidth and 309.5 Hz conditioned-system bandwidth. Nominal phase margins are 79.4\u00b0, 85.5\u00b0, and 90.4\u00b0 across the selected gains. The analog design gate passed; these are model results, not hardware measurements."
+          "text": "SIMULATED in LTspice using the TI OPAx320 model: approximately 15.9 kHz TIA bandwidth and 309.5 Hz conditioned-system bandwidth. Nominal phase margins are 79.4°, 85.5°, and 90.4° across the selected gains. The analog design gate passed; these are model results, not hardware measurements."
         },
         {
           "title": "PCB design",
-          "text": "The 60 \u00d7 45 mm two-layer layout keeps the photodiode/TIA input path short, clusters the feedback pairs, and excludes copper pour around sensitive summing and feedback nodes. Repository verification records clean ERC, DRC, connectivity, and schematic/PCB parity, plus a complete BOM and Gerber/drill package for bare-board prototype fabrication."
+          "text": "The 60 × 45 mm two-layer layout keeps the photodiode/TIA input path short, clusters the feedback pairs, and excludes copper pour around sensitive summing and feedback nodes. Repository verification records clean ERC, DRC, connectivity, and schematic/PCB parity, plus a complete BOM and Gerber/drill package for bare-board prototype fabrication."
         },
         {
           "title": "Firmware",
@@ -148,7 +186,7 @@
           "source": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/blob/701e282d3440408446555f829263162e5f198007/firmware/esp32/src/acquisition.cpp#L49-L58",
           "startLine": 49,
           "endLine": 58,
-          "locationLabel": "C++ \u00b7 lines 49\u201358"
+          "locationLabel": "C++ · lines 49–58"
         }
       ],
       "architecture": {
@@ -156,7 +194,7 @@
         "steps": [
           {
             "label": "01 / OPTICAL INPUT",
-            "title": "Light \u2192 BPW34"
+            "title": "Light → BPW34"
           },
           {
             "label": "02 / CURRENT TO VOLTAGE",
@@ -184,10 +222,124 @@
           },
           {
             "label": "08 / DATA",
-            "title": "Waveform \u00b7 CSV \u00b7 FFT"
+            "title": "Waveform · CSV · FFT"
           }
         ],
         "caption": "Designed signal chain. Firmware and offline software checks passed; end-to-end hardware characterization has not yet been performed."
+      },
+      "summary": [
+        {
+          "label": "Purpose",
+          "text": "Light-to-data acquisition chain."
+        },
+        {
+          "label": "My contribution",
+          "text": "Analog design → simulation → PCB → firmware → Python."
+        },
+        {
+          "label": "Tools",
+          "text": "OPA2320 · LTspice · KiCad · ESP32 · Python"
+        },
+        {
+          "label": "Validation",
+          "text": "SIMULATED / DESIGN VERIFIED. Fabrication-ready design; unmanufactured. Hardware measurements pending."
+        }
+      ],
+      "decisions": [
+        {
+          "title": "Gain without losing stability",
+          "problem": "Different photocurrent ranges require different transimpedance gains.",
+          "decision": "Select paired RF / CF values: 10 kΩ / 1 nF, 100 kΩ / 100 pF, or 1 MΩ / 10 pF.",
+          "evidence": "LTspice stability sweeps and the routed feedback network support the design. These are simulation results, not hardware measurements."
+        },
+        {
+          "title": "Separate acquisition from transport",
+          "problem": "Wireless transport must not own the sampling schedule.",
+          "decision": "Use a hardware timer to wake acquisition, with buffering separate from WebSocket telemetry.",
+          "evidence": "The pinned firmware build and offline Python checks passed. Actual timing and wireless throughput remain unmeasured."
+        }
+      ],
+      "annotations": {
+        "schematic": [
+          [
+            "Photodiode input",
+            "D1 is the provisional BPW34 detector feeding the summing node.",
+            6,
+            49
+          ],
+          [
+            "TIA",
+            "U1A converts detector current to a voltage referenced to VREF.",
+            21,
+            49
+          ],
+          [
+            "Gain selection",
+            "Three paired RF / CF networks and output-side links select one compensated gain.",
+            64,
+            47
+          ],
+          [
+            "Filtering",
+            "Two buffered low-pass sections condition the signal before the ADC.",
+            37,
+            80
+          ],
+          [
+            "ADC protection",
+            "The series resistor and BAT54S clamp limit the ADC input excursions.",
+            77,
+            79
+          ],
+          [
+            "ESP32 connection",
+            "J1 brings supply, ground and ADC_LINK to an external ESP32 DevKit.",
+            5,
+            16
+          ]
+        ],
+        "pcb": [
+          [
+            "Sensitive TIA region",
+            "Detector input and U1 sit close together, with sensitive summing-node copper kept compact.",
+            26,
+            47
+          ],
+          [
+            "RF / CF network",
+            "Feedback pairs run beside U1, below the three gain-selection links.",
+            20,
+            31
+          ],
+          [
+            "VREF / analog supply",
+            "U1 includes the reference buffer; the analog regulator is near the upper-right supply entrance.",
+            85,
+            29
+          ],
+          [
+            "ADC interface",
+            "The conditioned output reaches the ADC link jumper before the ESP32 header.",
+            81,
+            57
+          ],
+          [
+            "ESP32 header",
+            "J1 connects the analog board to an external ESP32. The ESP32 is not mounted on this PCB.",
+            94,
+            48
+          ]
+        ]
+      },
+      "card": {
+        "title": "Photodiode Sensor",
+        "description": "Selectable-gain analog circuitry connects light sensing to ESP32 and Python acquisition.",
+        "labels": [
+          "Analog / LTspice",
+          "KiCad",
+          "ESP32 / Python"
+        ],
+        "status": "Fabrication-ready design · unmanufactured"
       }
     },
     {
@@ -197,12 +349,12 @@
       "intro": "Designing an STM32H7 acquisition architecture for pulsed-LED photoacoustic tomography, with timer-triggered ADC sampling, DMA-to-memory buffering, and a planned ESP32 gateway.",
       "tags": [
         "STM32H7",
-        "ADC \u00b7 DMA",
+        "ADC · DMA",
         "Timer-triggered acquisition"
       ],
-      "status": "Iowa State University \u00b7 ongoing research",
+      "status": "Iowa State University · ongoing research",
       "diagram": true,
-      "caption": "Development architecture \u00b7 proposed data path, not a validated end-to-end system",
+      "caption": "Development architecture · proposed data path, not a validated end-to-end system",
       "sections": [
         {
           "title": "Research context",
@@ -220,7 +372,43 @@
           "title": "Current evidence",
           "text": "Ongoing research documented in my resume and development plan. No completed tomography reconstruction, measured throughput, or end-to-end hardware validation is claimed here."
         }
-      ]
+      ],
+      "summary": [
+        {
+          "label": "Purpose",
+          "text": "Embedded acquisition for pulsed-LED photoacoustic tomography."
+        },
+        {
+          "label": "My contribution",
+          "text": "Acquisition architecture, ADC timing and DMA-to-memory planning."
+        },
+        {
+          "label": "Tools",
+          "text": "STM32H7 · ADC · DMA · Timers"
+        },
+        {
+          "label": "Validation",
+          "text": "Ongoing research. Proposed architecture; end-to-end validation pending."
+        }
+      ],
+      "decisions": [
+        {
+          "title": "Move samples with predictable timing",
+          "problem": "Acquisition timing and data movement constrain the proposed system.",
+          "decision": "Explore timer-triggered STM32H7 ADC sampling with DMA-to-RAM buffering.",
+          "evidence": "The development architecture records this direction. It is not a completed or measured acquisition system."
+        }
+      ],
+      "card": {
+        "title": "Photoacoustic Acquisition",
+        "description": "Developing timed ADC capture and DMA buffering for pulsed-LED photoacoustic research.",
+        "labels": [
+          "STM32H7",
+          "ADC / DMA",
+          "Timing"
+        ],
+        "status": "Ongoing research · Iowa State University"
+      }
     },
     {
       "id": "power-interfaces",
@@ -230,9 +418,9 @@
       "tags": [
         "ESP32",
         "Flutter / Dart",
-        "BLE \u00b7 WebSockets"
+        "BLE · WebSockets"
       ],
-      "status": "IIT Hyderabad \u00b7 internship prototypes",
+      "status": "IIT Hyderabad · internship prototypes",
       "image": "assets/power-bench.jpeg",
       "secondary": "assets/pps-interface.png",
       "caption": "Original IIT Hyderabad report photograph and PPS Monitor screenshot",
@@ -268,7 +456,43 @@
           "startLine": 230,
           "endLine": 235
         }
-      ]
+      ],
+      "summary": [
+        {
+          "label": "Purpose",
+          "text": "Make power-system telemetry usable on embedded and mobile displays."
+        },
+        {
+          "label": "My contribution",
+          "text": "ESP32 display prototypes, Flutter plotting and communications."
+        },
+        {
+          "label": "Tools",
+          "text": "ESP32 · TFT · Flutter / Dart · BLE · WebSockets"
+        },
+        {
+          "label": "Validation",
+          "text": "Report and source document interface behavior. Public firmware uses simulated readings."
+        }
+      ],
+      "decisions": [
+        {
+          "title": "Keep displays usable",
+          "problem": "Small screens and mobile plots need bounded histories and responsive updates.",
+          "decision": "Use selective redraw on the TFT and rolling graph buffers in Flutter.",
+          "evidence": "The report photographs and public plotting code show the interface work; simulated readings exercise the public telemetry firmware."
+        }
+      ],
+      "card": {
+        "title": "Embedded Power Systems",
+        "description": "ESP32 display and Flutter prototypes make power-system telemetry visible and interactive.",
+        "labels": [
+          "ESP32",
+          "Flutter",
+          "BLE / WebSocket"
+        ],
+        "status": "Internship prototypes · IIT Hyderabad"
+      }
     },
     {
       "id": "networked-nodes",
@@ -276,11 +500,11 @@
       "title": "Multi-Node ESP32 Ethernet Telemetry",
       "intro": "Four ESP32 nodes with W5500 Ethernet stream generated waveforms to a four-panel Flutter interface, with independent WebSocket connections and per-device CSV recording.",
       "tags": [
-        "4 \u00d7 ESP32 + W5500",
-        "Ethernet \u00b7 WebSockets",
-        "Flutter \u00b7 CSV"
+        "4 × ESP32 + W5500",
+        "Ethernet · WebSockets",
+        "Flutter · CSV"
       ],
-      "status": "IIT Hyderabad \u00b7 report-documented demonstrations",
+      "status": "IIT Hyderabad · report-documented demonstrations",
       "image": "assets/four-node-upper.png",
       "caption": "Original report photographs of the four-panel Flutter dashboard: upper and lower views. Each graph belongs to an independent ESP32/W5500 connection.",
       "sections": [
@@ -305,18 +529,54 @@
       "detailCaption": "Original internship report screenshot: priority messaging code and serial output.",
       "codeSnapshots": [
         {
-          "file": "IIT Hyderabad report \u2014 Flutter UI Snapshot",
+          "file": "IIT Hyderabad report — Flutter UI Snapshot",
           "language": "dart",
           "code": "WebSocketChannel.connect(Uri.parse('ws://192.168.0.101:81'));\nWebSocketChannel.connect(Uri.parse('ws://192.168.0.102:81'));\nWebSocketChannel.connect(Uri.parse('ws://192.168.0.103:81'));\nWebSocketChannel.connect(Uri.parse('ws://192.168.0.104:81'));",
           "image": "assets/code/four-node-connections.png",
-          "caption": "Exact four-connection Dart excerpt from the internship report\u2019s Multi-ESP32 section. Illustrative connection addresses are reproduced from the report; this excerpt is documentation, not a complete Flutter application.",
+          "caption": "Exact four-connection Dart excerpt from the internship report’s Multi-ESP32 section. Illustrative connection addresses are reproduced from the report; this excerpt is documentation, not a complete Flutter application.",
           "source": null,
           "startLine": 135,
           "endLine": 138,
-          "locationLabel": "Report paragraphs 135\u2013138"
+          "locationLabel": "Report paragraphs 135–138"
         }
       ],
-      "secondary": "assets/four-node-lower.png"
+      "secondary": "assets/four-node-lower.png",
+      "summary": [
+        {
+          "label": "Purpose",
+          "text": "View and record four independent Ethernet data streams."
+        },
+        {
+          "label": "My contribution",
+          "text": "Four-channel Flutter dashboard, connection handling and CSV export."
+        },
+        {
+          "label": "Tools",
+          "text": "4 × ESP32 / W5500 · WebSockets · Flutter"
+        },
+        {
+          "label": "Validation",
+          "text": "Report-documented demonstrations with generated waveforms. No measured latency claim."
+        }
+      ],
+      "decisions": [
+        {
+          "title": "Keep four streams independent",
+          "problem": "Four boards need separate connections and graph histories.",
+          "decision": "Maintain one WebSocket connection per ESP32/W5500 node, with individual status and recording.",
+          "evidence": "The report captures the four-panel dashboard and connection excerpt. Generated sine waves exercise communication; they are not measured sensor signals."
+        }
+      ],
+      "card": {
+        "title": "Four-Node Ethernet Telemetry",
+        "description": "Four ESP32/W5500 nodes stream generated waveforms to independent dashboard channels.",
+        "labels": [
+          "4 × ESP32",
+          "W5500",
+          "WebSocket"
+        ],
+        "status": "Generated-waveform telemetry · IIT Hyderabad"
+      }
     }
   ]
 }

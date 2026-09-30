@@ -61,3 +61,7 @@ Source: [buffer-cloud/Photodiode-TIA-ESP32](https://github.com/buffer-cloud/Phot
 Only these four rendered images are published under `dist/assets/projects/photodiode-tia/`. No schematic/PCB source, vendor model, temporary render or bench photograph is copied. Geometry and plotted data were not invented. Source paths, dimensions and hashes are recorded in `docs/photodiode-assets.json`.
 
 The firmware excerpt reproduces `firmware/esp32/src/acquisition.cpp` lines 49–58. Firmware build, seven Python tests, synthetic smoke check and ERC/DRC/parity results are repository-recorded checks dated September 29, 2026. They do not establish physical sample timing, throughput or analog performance. The bandwidth and phase-margin values are explicitly simulated. Fabrication-ready refers to a bare-board prototype; procurement, component qualification, assembly and hardware characterization remain pending.
+
+## Technical storytelling overlays
+
+The signal-chain hero, project SVG icons and four-node system diagram are explanatory graphics, not measurements or reconstructed hardware. Photodiode annotations are separate HTML overlays on the unchanged source images; their descriptions and relative positions live in `content.json`. Board/Gerber selection reuses the existing genuine logger assets. No copper-only image was available, so none is fabricated.
