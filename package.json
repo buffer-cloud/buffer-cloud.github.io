@@ -6,7 +6,7 @@
   "description": "Source-grounded engineering portfolio with progressive enhancement and no client framework.",
   "scripts": {
     "build": "node build.mjs",
-    "lint": "node --check build.mjs && node --check serve.mjs && node --check dist/motion.js && node verify.mjs && node scripts/check-motion.mjs",
+    "lint": "node --check build.mjs && node --check home-refinement.mjs && node --check detail-refinement.mjs && node --check dist/detail-refinement.js && node --check serve.mjs && node --check dist/motion.js && node verify.mjs && node scripts/check-motion.mjs",
     "start": "node serve.mjs"
   },
   "engines": {

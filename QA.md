@@ -41,3 +41,13 @@ Circuit motion, brief mobile reveals, staggered cards, and gentle desktop parall
 - New card and detail page reviewed at desktop 1280px, tablet 768px and mobile widths. No horizontal page overflow; native keyboard image navigation and source links checked. No browser console errors observed.
 - Repository, simulation, KiCad, firmware, Python, fabrication and pinned source-excerpt links all returned HTTP 200.
 - The engineering repository remains unchanged. Only rendered visuals were copied; no vendor model, source design file, credentials or temporary render files are published.
+
+## Signal-chain and case-study refinement — September 29, 2026
+
+- Three scoped subagents: read-only UX/content audit, homepage implementation, and detail-page implementation. Parent integrated and performed browser QA.
+- All seven pages checked at 1440, 1280, 768, 390 and 375px: document width matched viewport at every size. Visually inspected desktop and mobile hero, tablet composition, mobile annotations and network diagram.
+- Keyboard focus triggers card and network SVG animations; focus indicators remain visible. Native annotation disclosure opens with Enter. The Board/Gerber buttons work with Enter/Space and expose the selected state with aria-pressed.
+- Browser pause/resume checks confirm the new hero stops and the preference persists onto the network page. Existing automated motion suite verifies OS reduced-motion transitions, pause persistence and storage fallback; new CSS also inherits the global reduced-motion stop. No OS setting was changed for testing.
+- Original image files remain unchanged. Photodiode has six schematic and five PCB annotations, as HTML overlays. Full-resolution source links remain available. Technical notes remain available through native disclosure even without JavaScript; both logger images are visible in the unenhanced HTML.
+- No frameworks or new runtime dependencies. Added CSS/JS totals about 9.5 KiB uncompressed (about 3.2 KiB gzip across all new files); each page loads only its relevant refinement styles. Detail-view JavaScript is 712 bytes. Existing photo in the internship preview is lazy-loaded.
+- Build, syntax/link/evidence checks, motion suite and diff whitespace checks passed. No browser console warnings/errors observed. These checks do not constitute a Lighthouse score or screen-reader certification.

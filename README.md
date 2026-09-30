@@ -21,7 +21,11 @@ Open http://127.0.0.1:4173. Set `PORT` to change the preview port. The committed
 - `asset-dimensions.json`: intrinsic dimensions for source images; update when replacing an asset.
 - `scripts/brand-assets.py`: optional Pillow-based favicon and sharing-artwork regeneration; not required to build.
 - `content.json`: project descriptions, evidence labels, code excerpts, image paths and source links.
-- `build.mjs`: page templates, project icons, navigation, and static page generation.
+- `build.mjs`: shared page shell, navigation, metadata and static page generation.
+- `home-refinement.mjs`: signal-chain hero, project icons, short Work cards and internship preview.
+- `detail-refinement.mjs`: summaries, engineering decisions and technical visual templates.
+- `dist/home-refinement.css`, `dist/detail-refinement.css`: scoped refinements to the existing visual system.
+- `dist/detail-refinement.js`: progressive enhancement for technical views; no runtime dependencies.
 - `dist/style.css`: responsive off-white visual system.
 - `dist/motion.js`: optional scroll and interaction animation; honors reduced motion.
 - `dist/index.html`: generated project gallery homepage.
@@ -42,7 +46,7 @@ For another static host, use `npm run build` and output directory `dist`. All pa
 
 ## Accessibility
 
-Single native link per project tile, decorative SVG icons, visible keyboard focus, skip links, descriptive image alternatives, selectable code text, and reduced-motion support. Animated circuit artwork, staggered entrances, scroll reveals, gentle desktop parallax and restrained card interactions are optional enhancements; the footer includes a Pause animation control. Desktop uses a full-width flagship, two secondary cards, a prominent photodiode TIA project with a real PCB thumbnail, and a full-width network project; mobile uses one column. Project pages provide All Projects and Next Project navigation. Mobile keeps gentle circuit motion and short reveals, with parallax limited to desktop. Motion stops when the operating system requests reduced motion. The manual pause preference persists between pages.
+Single native link per project tile, decorative SVG icons, visible keyboard focus, skip links, descriptive image alternatives, selectable code text, and reduced-motion support. Animated circuit artwork, staggered entrances, scroll reveals, gentle desktop parallax and restrained card interactions are optional enhancements; the footer includes a Pause animation control. Desktop uses a full-width flagship, two secondary cards, a prominent image-free photodiode project, and a full-width network project; mobile uses one column. Project pages provide All Projects and Next Project navigation. Mobile keeps gentle circuit motion and short reveals, with parallax limited to desktop. Motion stops when the operating system requests reduced motion. The manual pause preference persists between pages.
 
 ## Evidence boundaries
 
@@ -60,6 +64,12 @@ Finished CAD is on [pcb-reva-layout](https://github.com/buffer-cloud/MCU-Datalog
 
 ## Photodiode TIA project
 
-The new case study is `dist/projects/photodiode-tia.html`. Four compact images in `dist/assets/projects/photodiode-tia/` come from the actual KiCad schematic, fabrication outputs and LTspice results at engineering revision `701e282d3440408446555f829263162e5f198007`. `docs/photodiode-assets.json` records dimensions, source paths and SHA-256 hashes. Reusable optional `thumbnail`, `gallery`, `architecture`, `resources` and `cardMeta` fields in `content.json` integrate it with the existing templates.
+The new case study is `dist/projects/photodiode-tia.html`. Four compact images in `dist/assets/projects/photodiode-tia/` come from the actual KiCad schematic, fabrication outputs and LTspice results at engineering revision `701e282d3440408446555f829263162e5f198007`. `docs/photodiode-assets.json` records dimensions, source paths and SHA-256 hashes. Project `card`, `summary`, `decisions`, `annotations`, `gallery`, `architecture` and `resources` fields in `content.json` feed the shared templates.
 
 Revision A is a fabrication-ready bare-board prototype design. It has not been manufactured or physically characterized. Firmware/software checks and simulation results do not imply measured analog performance.
+
+## Signal-chain refinement
+
+The homepage retains the warm paper palette and typography, with a sensor → analog → MCU → interface hero. Cards use short names independently of the full technical project titles. Their SVG illustrations animate briefly on hover or keyboard focus. All motion uses the existing pause preference and operating-system reduced-motion rules.
+
+Each case study opens with Purpose, My contribution, Tools and Validation facts. Engineering decisions connect problems to design choices and available evidence. Photodiode annotations overlay genuine schematic and fabrication images; the source pixels remain unchanged. The logger offers actual Board and Gerber views (there is no separate verified copper-view asset). The four-node diagram is explanatory, with report screenshots retained as separate evidence.

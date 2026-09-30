@@ -81,3 +81,14 @@ assert(/:focus-visible/.test(css),'Visible keyboard-focus styling missing');
 assert(/color-scheme\s*:\s*light/.test(css),'Off-white/light theme missing');
 assert.equal(files.length,7);
 console.log('Verified seven pages, same-tab project navigation, metadata, landmarks, image dimensions, assets, anchors, code snapshots and evidence labels.');
+
+// Regression guards for the signal-chain refinement and honest project summaries.
+const home = contents['index.html'];
+for(const title of ['MCU Data Logger','Photodiode Sensor','Photoacoustic Acquisition','Embedded Power Systems','Four-Node Ethernet Telemetry'])assert(home.includes(title),`Missing short card title: ${title}`);
+assert(!home.includes('tile-thumbnail'),'Work cards must remain image-free');
+for(const file of files.filter(f=>f.startsWith('projects/'))){
+ for(const label of ['Purpose','My contribution','Tools','Validation'])assert(contents[file].includes(label),`Missing summary ${label} in ${file}`);
+}
+assert(photodiode.indexOf('schematic.webp') < photodiode.indexOf('pcb-top.webp'),'Photodiode schematic must precede PCB view');
+assert(!/deterministic communication/i.test(network),'Unverified network timing claim');
+console.log('Verified short cards, opening summaries, schematic-first storytelling and network evidence boundaries.');
