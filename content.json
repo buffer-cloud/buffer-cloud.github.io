@@ -135,6 +135,10 @@
           "text": "Host tools provide waveform viewing, CSV recording, FFT, dark/no-signal noise analysis, and gain/frequency-response workflows. Seven offline tests and a synthetic capture-to-FFT smoke check are recorded as passing on September 29, 2026. Synthetic data validates software behavior; it is not measured optical performance."
         },
         {
+          "title": "Phase-sensitive sensing research",
+          "text": "An in-progress research track adds timestamp-aware lock-in estimation and a seeded synthetic comparison against raw-range and known-frequency FFT methods. A preliminary 10-second ESP32 stream check with GPIO34 open delivered 5,632 samples at a configured 1 kS/s and reported 1,024 newly dropped samples; other clients and Wi-Fi conditions were uncontrolled. The next gate is controlled stream characterization, followed by LED/photodiode measurements. No optical detection result is claimed."
+        },
+        {
           "title": "Project status",
           "text": "DESIGN / SIMULATION / PCB / SOFTWARE COMPLETE. The ESP32 Dev Module and Flutter stream have been demonstrated with an unconnected ADC input. Revision A remains unmanufactured. Analog hardware characterization has not yet been performed; assembly, calibration, and bench validation remain the next steps."
         }
@@ -188,6 +192,10 @@
         {
           "label": "Flutter dashboard",
           "url": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/tree/main/software/flutter"
+        },
+        {
+          "label": "Phase-sensitive research",
+          "url": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/tree/main/research/phase-sensitive"
         },
         {
           "label": "Fabrication package",
