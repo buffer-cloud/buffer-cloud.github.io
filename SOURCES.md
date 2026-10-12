@@ -60,7 +60,7 @@ Source: [buffer-cloud/Photodiode-TIA-ESP32](https://github.com/buffer-cloud/Phot
 
 Only these four rendered images are published under `dist/assets/projects/photodiode-tia/`. No schematic/PCB source, vendor model, temporary render or bench photograph is copied. Geometry and plotted data were not invented. Source paths, dimensions and hashes are recorded in `docs/photodiode-assets.json`.
 
-The firmware excerpt reproduces `firmware/esp32/src/acquisition.cpp` lines 49–58. Firmware build, seven Python tests, synthetic smoke check and ERC/DRC/parity results are repository-recorded checks dated September 29, 2026. They do not establish physical sample timing, throughput or analog performance. The bandwidth and phase-margin values are explicitly simulated. Fabrication-ready refers to a bare-board prototype; procurement, component qualification, assembly and hardware characterization remain pending.
+The firmware excerpt reproduces `firmware/esp32/src/acquisition.cpp` lines 49–58. Firmware build, seven Python tests, synthetic smoke check and ERC/DRC/parity results are repository-recorded checks dated September 29, 2026. The October 12, 2026 [live stream-health report](https://github.com/buffer-cloud/Photodiode-TIA-ESP32/blob/main/research/phase-sensitive/stream-health.md) adds physical ESP32 tests with GPIO34 open: short 1 kS/s captures without measured drops and a 4 kS/s capture with drops. These establish neither indefinite throughput nor analog or optical performance. The bandwidth and phase-margin values are explicitly simulated. Fabrication-ready refers to a bare-board prototype; procurement, component qualification, assembly and hardware characterization remain pending.
 
 ## Technical storytelling overlays
 

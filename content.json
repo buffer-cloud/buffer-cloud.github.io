@@ -124,7 +124,7 @@
         },
         {
           "title": "Firmware",
-          "text": "ESP32 ADC1 / GPIO34 acquisition is driven by a hardware timer and buffered separately from WebSocket telemetry. The firmware was built and uploaded to an ESP32 Dev Module; the live Wi-Fi/WebSocket stream reached Chrome. The default is 4 kS/s, and transport drops were observed on the tested Wi-Fi. Running at 1 kS/s reduced drops during the short dashboard check. Precise sample timing and throughput remain to be characterized."
+          "text": "ESP32 ADC1 / GPIO34 acquisition is driven by a hardware timer and buffered separately from WebSocket telemetry. Firmware is running on the ESP32 Dev Module. The current live-demo default is 1 kS/s: a fresh 10-second Wi-Fi capture delivered 9,984 samples with no new device drops or missing packet sequences. The 4 kS/s design target still loses samples in the tested setup, so its transport path needs further work."
         },
         {
           "title": "Flutter dashboard",
@@ -136,7 +136,7 @@
         },
         {
           "title": "Phase-sensitive sensing research",
-          "text": "An in-progress research track adds timestamp-aware lock-in estimation and a seeded synthetic comparison against raw-range and known-frequency FFT methods. A preliminary 10-second ESP32 stream check with GPIO34 open delivered 5,632 samples at a configured 1 kS/s and reported 1,024 newly dropped samples; other clients and Wi-Fi conditions were uncontrolled. The next gate is controlled stream characterization, followed by LED/photodiode measurements. No optical detection result is claimed."
+          "text": "An in-progress research track adds timestamp-aware lock-in estimation and a seeded synthetic comparison against raw-range and known-frequency FFT methods. With GPIO34 open, a 15-second test sent 14,848 samples to each of three simultaneous Python receivers at 1 kS/s, with no measured device drops or sequence gaps. At 4 kS/s, a single-receiver 12-second test delivered 42,240 samples and reported 4,096 new drops. These short local-network captures establish a demo operating point and an unresolved throughput limit; they are not optical detection results."
         },
         {
           "title": "Project status",
@@ -196,6 +196,10 @@
         {
           "label": "Phase-sensitive research",
           "url": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/tree/main/research/phase-sensitive"
+        },
+        {
+          "label": "Live ESP32 stream-health results",
+          "url": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/blob/main/research/phase-sensitive/stream-health.md"
         },
         {
           "label": "Fabrication package",
@@ -267,7 +271,7 @@
         },
         {
           "label": "Validation",
-          "text": "Analog design simulated; bare ESP32 stream demonstrated. PCB unmanufactured; optical measurements pending."
+          "text": "1 kS/s ESP32 stream checked live; 4 kS/s target has drops. PCB unmanufactured; optical measurements pending."
         }
       ],
       "decisions": [
@@ -281,7 +285,7 @@
           "title": "Separate acquisition from transport",
           "problem": "Wireless transport must not own the sampling schedule.",
           "decision": "Use a hardware timer to wake acquisition, with buffering separate from WebSocket telemetry.",
-          "evidence": "The pinned firmware build and offline Python checks passed. Actual timing and wireless throughput remain unmeasured."
+          "evidence": "Live 10-second single-receiver and 15-second three-receiver captures at 1 kS/s had no new drops or sequence gaps. A 4 kS/s capture showed drops; the stream-health report records the conditions and limits."
         }
       ],
       "annotations": {
