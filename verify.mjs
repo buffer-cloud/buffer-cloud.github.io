@@ -68,12 +68,16 @@ assert(!Object.values(contents).some(html=>/\b(?:two|2)[- ]node\b/i.test(html)),
 const photodiode=contents['projects/photodiode-tia.html'];
 assert(photodiode, 'Photodiode case study missing');
 assert(/BPW34/.test(photodiode)&&/OPA2320/.test(photodiode),'Analog signal-chain details missing');
-assert(/simulat/i.test(photodiode)&&/hardware characterization/i.test(photodiode)&&/not yet performed/i.test(photodiode),'Simulation and hardware-status distinction missing');
+assert(/simulat/i.test(photodiode)&&/hardware characterization/i.test(photodiode)&&/not yet been performed/i.test(photodiode),'Simulation and hardware-status distinction missing');
 assert(/schematic/i.test(photodiode)&&/pcb-top|gerber/i.test(photodiode),'Required design visuals missing');
 assert(photodiode.includes('github.com/buffer-cloud/Photodiode-TIA-ESP32'),'Engineering source link missing');
+assert(photodiode.includes('class="project-live-media"'),'ESP32 recording section missing');
+assert(photodiode.includes('esp32-dashboard-live.jpg')&&photodiode.includes('esp32-dashboard-live.mp4'),'Dashboard screenshot or recording missing');
+assert(/floating-pin readings/.test(photodiode)&&/not photodiode response/.test(photodiode),'Media evidence boundary missing');
+assert(/<video controls playsinline/.test(photodiode),'Accessible video controls missing');
 for(const name of fs.readdirSync(path.join(root,'assets/projects/photodiode-tia'))){
- assert(/\.(svg|png|webp|jpe?g)$/.test(name),`Unexpected source or temporary file in project assets: ${name}`);
- assert(fs.statSync(path.join(root,'assets/projects/photodiode-tia',name)).size<2_000_000,`Project asset needs optimization: ${name}`);
+ assert(/\.(svg|png|webp|jpe?g|mp4)$/.test(name),`Unexpected source or temporary file in project assets: ${name}`);
+ assert(fs.statSync(path.join(root,'assets/projects/photodiode-tia',name)).size<(name.endsWith('.mp4')?20_000_000:2_000_000),`Project asset needs optimization: ${name}`);
 }
 const css=fs.readFileSync(path.join(root,'style.css'),'utf8');
 assert(/prefers-reduced-motion\s*:\s*reduce/.test(css),'Reduced-motion style support missing');

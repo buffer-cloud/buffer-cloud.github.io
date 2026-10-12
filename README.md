@@ -64,7 +64,7 @@ Finished CAD is on [pcb-reva-layout](https://github.com/buffer-cloud/MCU-Datalog
 
 ## Photodiode TIA project
 
-The new case study is `dist/projects/photodiode-tia.html`. Four compact images in `dist/assets/projects/photodiode-tia/` come from the actual KiCad schematic, fabrication outputs and LTspice results at engineering revision `701e282d3440408446555f829263162e5f198007`. `docs/photodiode-assets.json` records dimensions, source paths and SHA-256 hashes. Project `card`, `summary`, `decisions`, `annotations`, `gallery`, `architecture` and `resources` fields in `content.json` feed the shared templates.
+The case study is `dist/projects/photodiode-tia.html`. Four compact images in `dist/assets/projects/photodiode-tia/` come from the actual KiCad schematic, fabrication outputs and LTspice results at engineering revision `701e282d3440408446555f829263162e5f198007`. A separate screenshot and short recording show the ESP32 Dev Module streaming its open ADC input to the Flutter dashboard; they are not photodiode measurements. `docs/photodiode-assets.json` records source and dimensions for the original engineering images. Project `card`, `summary`, `decisions`, `annotations`, `gallery`, `media`, `architecture` and `resources` fields in `content.json` feed the shared templates.
 
 Revision A is a fabrication-ready bare-board prototype design. It has not been manufactured or physically characterized. Firmware/software checks and simulation results do not imply measured analog performance.
 

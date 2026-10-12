@@ -94,13 +94,13 @@
       "id": "photodiode-tia",
       "number": "02",
       "title": "Photodiode TIA & Wireless Optical Sensor",
-      "intro": "Designed a selectable-gain photodiode front end, two-layer PCB, and ESP32-to-Python acquisition pipeline, supported by LTspice simulation and software checks.",
+      "intro": "Designed a selectable-gain photodiode front end and PCB, then demonstrated live ESP32 acquisition through a Flutter dashboard. Optical measurements await board assembly.",
       "tags": [
         "Analog · LTspice",
         "KiCad · 2 layers",
-        "ESP32 · Python"
+        "ESP32 · Flutter"
       ],
-      "status": "Rev A design, simulation, PCB & software complete",
+      "status": "ESP32 live demo · analog board pending",
       "image": "assets/projects/photodiode-tia/pcb-top.webp",
       "caption": "Rev A top view rendered from actual Gerber and drill files. Design visualization; the board has not been manufactured.",
       "imageAlt": "Gerber-derived top view of the 60 by 45 mm photodiode TIA PCB, showing gain links, routing, pads and the external ESP32 connector.",
@@ -124,7 +124,11 @@
         },
         {
           "title": "Firmware",
-          "text": "ESP32 ADC1 / GPIO34 acquisition is driven by a hardware timer and buffered separately from WebSocket telemetry. Firmware is configured for 4 kS/s by default, with sample-loss accounting and timestamps. The pinned PlatformIO build passed; actual sampling timing and wireless throughput have not been verified on hardware."
+          "text": "ESP32 ADC1 / GPIO34 acquisition is driven by a hardware timer and buffered separately from WebSocket telemetry. The firmware was built and uploaded to an ESP32 Dev Module; the live Wi-Fi/WebSocket stream reached Chrome. The default is 4 kS/s, and transport drops were observed on the tested Wi-Fi. Running at 1 kS/s reduced drops during the short dashboard check. Precise sample timing and throughput remain to be characterized."
+        },
+        {
+          "title": "Flutter dashboard",
+          "text": "The Flutter web dashboard displays the live ADC waveform, raw counts, calibrated pin millivolts, sample rate and packet-health counters. It reconnects after ESP32 resets and distinguishes device data from an optional simulated demo. Because the photodiode/TIA board is not assembled, the recorded GPIO34 input is floating; the changing readings are not optical measurements."
         },
         {
           "title": "Python analysis",
@@ -132,7 +136,7 @@
         },
         {
           "title": "Project status",
-          "text": "DESIGN / SIMULATION / PCB / SOFTWARE COMPLETE. Revision A is fabrication-ready as a bare-board prototype. Hardware characterization: Not yet performed. Component qualification, assembly, ADC calibration, and bench validation remain the next steps."
+          "text": "DESIGN / SIMULATION / PCB / SOFTWARE COMPLETE. The ESP32 Dev Module and Flutter stream have been demonstrated with an unconnected ADC input. Revision A remains unmanufactured. Analog hardware characterization has not yet been performed; assembly, calibration, and bench validation remain the next steps."
         }
       ],
       "gallery": [
@@ -155,6 +159,15 @@
           "alt": "LTspice simulated transimpedance curves for 10 kilohm, 100 kilohm and 1 megohm gain settings, with TIA output and conditioned ADC response."
         }
       ],
+      "media": {
+        "screenshot": "assets/projects/photodiode-tia/esp32-dashboard-live.jpg",
+        "video": "assets/projects/photodiode-tia/esp32-dashboard-live.mp4",
+        "description": "A short screen recording and still capture of the Flutter dashboard receiving telemetry from the standalone ESP32 Dev Module. GPIO34 was unconnected; these floating-pin readings demonstrate acquisition and transport, not photodiode response. Packet-loss counters remain visible.",
+        "videoAlt": "Recording of the Photon Flutter dashboard showing the live ESP32 ADC stream",
+        "videoCaption": "Live ESP32-to-Flutter stream on the local network. Open ADC input; no optical stimulus or photodiode/TIA board.",
+        "screenshotAlt": "Photon dashboard showing an ESP32 connection, live raw ADC waveform, pin voltage and stream health with an ADC input open warning",
+        "screenshotCaption": "Still capture from the same live run. GPIO34 was floating and the displayed voltage is pin calibration, not optical signal."
+      },
       "resources": [
         {
           "label": "LTspice simulation",
@@ -171,6 +184,10 @@
         {
           "label": "Python analysis",
           "url": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/tree/main/software/python"
+        },
+        {
+          "label": "Flutter dashboard",
+          "url": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/tree/main/software/flutter"
         },
         {
           "label": "Fabrication package",
@@ -217,15 +234,15 @@
             "title": "WebSocket telemetry"
           },
           {
-            "label": "07 / HOST SOFTWARE",
-            "title": "Python analysis"
+          "label": "07 / HOST SOFTWARE",
+            "title": "Flutter + Python"
           },
           {
             "label": "08 / DATA",
             "title": "Waveform · CSV · FFT"
           }
         ],
-        "caption": "Designed signal chain. Firmware and offline software checks passed; end-to-end hardware characterization has not yet been performed."
+        "caption": "The ESP32-to-Flutter stream was demonstrated with GPIO34 floating. The designed analog signal chain and optical response have not yet been measured."
       },
       "summary": [
         {
@@ -234,15 +251,15 @@
         },
         {
           "label": "My contribution",
-          "text": "Analog design → simulation → PCB → firmware → Python."
+          "text": "Analog design → simulation → PCB → ESP32 firmware → Flutter + Python."
         },
         {
           "label": "Tools",
-          "text": "OPA2320 · LTspice · KiCad · ESP32 · Python"
+          "text": "OPA2320 · LTspice · KiCad · ESP32 · Flutter · Python"
         },
         {
           "label": "Validation",
-          "text": "SIMULATED / DESIGN VERIFIED. Fabrication-ready design; unmanufactured. Hardware measurements pending."
+          "text": "Analog design simulated; bare ESP32 stream demonstrated. PCB unmanufactured; optical measurements pending."
         }
       ],
       "decisions": [
