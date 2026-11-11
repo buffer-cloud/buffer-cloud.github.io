@@ -62,5 +62,13 @@
   "assets/projects/photodiode-tia/esp32-dashboard-live.jpg": [
     1680,
     872
+  ],
+  "assets/projects/photoacoustic/vca8500-reference-schematic.png": [
+    3508,
+    2481
+  ],
+  "assets/projects/photoacoustic/vca8500-simulated-gain.png": [
+    1800,
+    990
   ]
 }

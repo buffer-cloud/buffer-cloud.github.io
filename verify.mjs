@@ -96,3 +96,9 @@ for(const file of files.filter(f=>f.startsWith('projects/'))){
 assert(photodiode.indexOf('schematic.webp') < photodiode.indexOf('pcb-top.webp'),'Photodiode schematic must precede PCB view');
 assert(!/deterministic communication/i.test(network),'Unverified network timing claim');
 console.log('Verified short cards, opening summaries, schematic-first storytelling and network evidence boundaries.');
+
+const pa=contents['projects/photoacoustic.html'];
+assert(pa.includes('VCA8500')&&pa.includes('vca8500-reference-schematic.png')&&pa.includes('vca8500-simulated-gain.png'),'VCA8500 research visuals missing');
+assert(pa.includes('28 ERC errors')&&pa.includes('not measured'),'VCA8500 evidence limits missing');
+for(const html of Object.values(contents)) assert(/Amlesh-Sahoo-Resume\.pdf\?v=[0-9a-f]{10}/.test(html),'Versioned current resume link missing');
+console.log('Verified VCA8500 visuals, source qualifications and versioned resume links.');

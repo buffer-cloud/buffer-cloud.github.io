@@ -73,3 +73,7 @@ Revision A is a fabrication-ready bare-board prototype design. It has not been m
 The homepage retains the warm paper palette and typography, with a sensor → analog → MCU → interface hero. Cards use short names independently of the full technical project titles. Their SVG illustrations animate briefly on hover or keyboard focus. All motion uses the existing pause preference and operating-system reduced-motion rules.
 
 Each case study opens with Purpose, My contribution, Tools and Validation facts. Engineering decisions connect problems to design choices and available evidence. Photodiode annotations overlay genuine schematic and fabrication images; the source pixels remain unchanged. The logger offers actual Board and Gerber views (there is no separate verified copper-view asset). The four-node diagram is explanatory, with report screenshots retained as separate evidence.
+
+## VCA8500 and resume update
+
+The photoacoustic case study now includes the user's draft eight-channel VCA8500 KiCad schematic and model-based control-voltage gain plot. Both are labeled with their current verification limits. The linked `dist/assets/Amlesh-Sahoo-Resume.pdf` is the newly revised one-page, ATS-friendly copy styled to match the earlier portfolio resume, with the VCA8500 work under Iowa State research. Links carry a content version so visitors receive the new PDF after deployment.

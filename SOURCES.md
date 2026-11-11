@@ -3,7 +3,7 @@
 ## Primary documents
 
 - **IIT Hyderabad Internship Final Report.docx**, supplied by Amlesh Sahoo (PEEC Lab files). Original embedded images were extracted without alteration. The similarly named report in Downloads contains placeholders and was not used for site imagery.
-- **Amlesh Swarup Sahoo Resume.pdf**, current supplied resume. Establishes the BITS Pilani–Iowa State dual-degree program, research and internship roles, professional contact, and LinkedIn link. A copy is linked on the site.
+- **Amlesh Swarup Sahoo Resume.pdf**, original supplied resume, used to verify education, roles and professional contact. The site now links to a separate revised, one-page resume with source-qualified project claims and VCA8500 research work; the original remains in version history.
 - **Pulsed LED PAT Project Flow and Phases.pdf**, supplied development plan. Establishes the proposed acquisition architecture; it does not establish completed system validation.
 
 ## Report assets
@@ -65,3 +65,7 @@ The firmware excerpt reproduces `firmware/esp32/src/acquisition.cpp` lines 49–
 ## Technical storytelling overlays
 
 The signal-chain hero, project SVG icons and four-node system diagram are explanatory graphics, not measurements or reconstructed hardware. Photodiode annotations are separate HTML overlays on the unchanged source images; their descriptions and relative positions live in `content.json`. Board/Gerber selection reuses the existing genuine logger assets. No copper-only image was available, so none is fabricated.
+
+## Photoacoustic VCA8500 research update
+
+The additional website images are copied unchanged from the user's local photoacoustic research package: `kicad/VCA8500_Reference/export/schematic.png` and `ltspice/VCA8500_VCNTL_Sweep_Package/vcntl_gain_summary.png`. The KiCad drawing is an eight-channel reference schematic based on the TI VCA8500 datasheet. Its PDF and XML netlist exported, but ERC currently reports 28 open errors and off-grid warnings; power, controls, parts, layout and integration need work. The LTspice plot is a TI single-channel-model simulation at 5 MHz with a 20 µVpp input and VCNTL settings of 0, 0.5 and 1.2 V. Its gain values are modeled, not measured. No VCA8500 hardware validation or complete photoacoustic acquisition is claimed.

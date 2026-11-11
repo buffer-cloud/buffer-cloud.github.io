@@ -246,7 +246,7 @@
             "title": "WebSocket telemetry"
           },
           {
-          "label": "07 / HOST SOFTWARE",
+            "label": "07 / HOST SOFTWARE",
             "title": "Flutter + Python"
           },
           {
@@ -375,11 +375,11 @@
       "id": "photoacoustic",
       "number": "03",
       "title": "STM32H7 Photoacoustic Acquisition System",
-      "intro": "Designing an STM32H7 acquisition architecture for pulsed-LED photoacoustic tomography, with timer-triggered ADC sampling, DMA-to-memory buffering, and a planned ESP32 gateway.",
+      "intro": "Developing photoacoustic acquisition around STM32H7 timing and a VCA8500 analog front end, with KiCad reference design and LTspice simulation in progress.",
       "tags": [
-        "STM32H7",
-        "ADC · DMA",
-        "Timer-triggered acquisition"
+        "STM32H7 · acquisition",
+        "VCA8500 · analog front end",
+        "KiCad · LTspice"
       ],
       "status": "Iowa State University · ongoing research",
       "diagram": true,
@@ -392,6 +392,14 @@
         {
           "title": "My focus",
           "text": "Timer-triggered ADC sampling, DMA-to-RAM buffering, memory organization, and peripheral integration. The design work explores how timing and data movement constrain an embedded acquisition pipeline."
+        },
+        {
+          "title": "VCA8500 analog front end",
+          "text": "Drafted an eight-channel VCA8500 KiCad reference schematic based on the TI datasheet, including input coupling, bias bypassing, output links and VCNTL filtering. Exported the schematic and netlist; external controls, power and board integration remain unresolved. The current reference schematic has 28 ERC errors from dangling labels and unconnected control inputs, plus off-grid warnings."
+        },
+        {
+          "title": "VCA8500 simulation evidence",
+          "text": "Ran the TI single-channel model in LTspice at a 5 MHz, 20 µVpp input while varying VCNTL from 0 to 1.2 V. The modeled OUT+ amplitude changed from 7.435 µVpp to 1.323 mVpp across the endpoints. These are simulation results for a specified model and load, not measured receive-chain performance."
         },
         {
           "title": "System direction",
@@ -409,15 +417,15 @@
         },
         {
           "label": "My contribution",
-          "text": "Acquisition architecture, ADC timing and DMA-to-memory planning."
+          "text": "Acquisition planning, analog filtering simulation and VCA8500 reference schematic."
         },
         {
           "label": "Tools",
-          "text": "STM32H7 · ADC · DMA · Timers"
+          "text": "STM32H7 · VCA8500 · KiCad · LTspice · ADC / DMA"
         },
         {
           "label": "Validation",
-          "text": "Ongoing research. Proposed architecture; end-to-end validation pending."
+          "text": "VCA8500 model sweep completed; schematic exported. ERC cleanup, integration and hardware validation pending."
         }
       ],
       "decisions": [
@@ -426,18 +434,38 @@
           "problem": "Acquisition timing and data movement constrain the proposed system.",
           "decision": "Explore timer-triggered STM32H7 ADC sampling with DMA-to-RAM buffering.",
           "evidence": "The development architecture records this direction. It is not a completed or measured acquisition system."
+        },
+        {
+          "title": "Evaluate variable gain before acquisition",
+          "problem": "Photoacoustic receive signals may require gain control ahead of digitization.",
+          "decision": "Investigate an eight-channel VCA8500 front end and sweep its single-channel TI model across control voltage.",
+          "evidence": "The KiCad reference schematic and LTspice gain plot document the design study. ERC closure, PCB integration and hardware measurements are pending."
         }
       ],
       "card": {
         "title": "Photoacoustic Acquisition",
-        "description": "Developing timed ADC capture and DMA buffering for pulsed-LED photoacoustic research.",
+        "description": "Exploring STM32H7 acquisition and a VCA8500 analog front end for photoacoustic research.",
         "labels": [
           "STM32H7",
-          "ADC / DMA",
-          "Timing"
+          "VCA8500",
+          "KiCad / LTspice"
         ],
         "status": "Ongoing research · Iowa State University"
-      }
+      },
+      "gallery": [
+        {
+          "title": "VCA8500 reference schematic",
+          "image": "assets/projects/photoacoustic/vca8500-reference-schematic.png",
+          "alt": "Actual draft KiCad eight-channel VCA8500 reference schematic with input capacitors, output links, bias bypassing and control-voltage filter.",
+          "caption": "Draft KiCad reference schematic derived from the TI datasheet. Schematic PDF and XML netlist exported; 28 ERC errors and off-grid warnings remain before board integration."
+        },
+        {
+          "title": "Simulated VCA8500 gain control",
+          "image": "assets/projects/photoacoustic/vca8500-simulated-gain.png",
+          "alt": "LTspice model gain versus VCA8500 control voltage for three simulated settings at a 5 MHz test input.",
+          "caption": "TI single-channel model sweep at 5 MHz with 20 µVpp input: VCNTL 0, 0.5 and 1.2 V. Modeled response only; no hardware measurement."
+        }
+      ]
     },
     {
       "id": "power-interfaces",
