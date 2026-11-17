@@ -79,8 +79,7 @@
 .tile-media { position:relative; overflow:hidden; aspect-ratio:16/10; background:#dfe4d6; border-bottom:1px solid var(--line); }
 .tile-media img { display:block; width:100%; height:100%; object-fit:cover; transition:transform .7s var(--ease),filter .5s; }
 .refined-tile:is(:hover,:focus-visible) .tile-media img { transform:scale(1.045); }
-.tile-photoacoustic .tile-media { background:#fff; }
-.tile-photoacoustic .tile-media img { object-fit:contain; padding:14px; }
+.tile-photoacoustic .tile-media,.tile-power-interfaces .tile-media,.tile-networked-nodes .tile-media { background:var(--ink); }
 
 /* Featured: dark, split layout */
 .project-tile.featured.refined-tile { grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); grid-template-rows:auto; background:radial-gradient(120% 140% at 85% 30%,#2a3a31 0%,var(--ink) 60%); border-color:var(--ink); color:var(--on-ink); min-height:480px; }

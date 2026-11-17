@@ -21,9 +21,9 @@ const tools = ['KiCad','LTspice','STM32H7','ESP32','ATmega328P','C / C++','I²C 
 const thumbAlt = {
  'data-logger':'KiCad 3D render of the routed MCU Data Logger board',
  'photodiode-tia':'Gerber-rendered top view of the photodiode TIA PCB with gain-select links and test points',
- 'photoacoustic':'LTspice plot of modeled VCA8500 gain versus control voltage',
- 'power-interfaces':'ESP32 breadboard prototype driving a TFT display at IIT Hyderabad',
- 'networked-nodes':'Flutter dashboard panels streaming waveforms from independent ESP32 nodes'
+ 'photoacoustic':'KiCad layout of the eight-channel VCA8500 receive board, revision v2',
+ 'power-interfaces':'Illustration: an ESP32 drives a TFT power monitor and streams telemetry over BLE to a Flutter phone app',
+ 'networked-nodes':'Illustration: four ESP32 + W5500 nodes connect over Ethernet to a four-panel Flutter dashboard'
 };
 export function renderHome(data, {esc,imageSize,resumeHref}) {
  const gallery=data.projects.map(p=>{const {title,description,labels,status}=p.card;const thumb=`assets/thumbs/${p.id}.webp`;return `<a class="project-tile refined-tile tile-${p.id}${p.id==='data-logger'?' featured':['networked-nodes','photodiode-tia'].includes(p.id)?' tile-wide':''}" href="projects/${p.id}.html"><div class="tile-media"><img src="${thumb}" ${imageSize(thumb)} alt="${esc(thumbAlt[p.id])}" loading="${p.id==='data-logger'?'eager':'lazy'}" decoding="async"></div><div class="tile-body"><div class="tile-top"><span class="eyebrow">${esc(p.number)} / ${esc(labels[0])}</span><span class="tile-arrow" aria-hidden="true">→</span></div><div class="project-icon">${renderIcon(p)}</div><h3>${esc(title)}</h3><p>${esc(description)}</p><ul class="card-labels" aria-label="Technical focus">${labels.map(t=>`<li>${esc(t)}</li>`).join('')}</ul><span class="tile-status">${esc(status)}</span><span class="tile-link">View case study <span aria-hidden="true">→</span></span></div></a>`;}).join('');

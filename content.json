@@ -374,11 +374,11 @@
     {
       "id": "photoacoustic",
       "number": "03",
-      "title": "STM32H7 Photoacoustic Acquisition System",
-      "intro": "Undergraduate research at Iowa State University: designing an embedded acquisition path for pulsed-LED photoacoustic tomography, with an eight-channel VCA8500 variable-gain front end and STM32H7 timer/DMA sampling.",
+      "title": "Photoacoustic Tomography Acquisition System",
+      "intro": "Undergraduate research at Iowa State University: building the receive and acquisition hardware for pulsed-LED photoacoustic tomography — an eight-channel VCA8500 variable-gain receive board, now routed at revision v2, feeding STM32H7 timer/DMA sampling.",
       "tags": [
+        "VCA8500 · 8-channel receive board",
         "STM32H7 · acquisition",
-        "VCA8500 · analog front end",
         "KiCad · LTspice"
       ],
       "status": "Iowa State University · ongoing research",
@@ -395,7 +395,7 @@
         },
         {
           "title": "VCA8500 analog front end",
-          "text": "Drafted an eight-channel VCA8500 KiCad reference schematic from the TI datasheet, covering input coupling, bias bypassing, output links and VCNTL filtering, and exported the schematic and netlist. Control, power and board integration are the current focus."
+          "text": "Designed an eight-channel VCA8500 receive board in KiCad, starting from a datasheet-based reference schematic. The routed v2 layout places the VCA8500 at the centre with eight AC-coupled inputs (J1–J8) on the left and right edges, eight differential output channels (J9–J16) along the bottom, per-channel test points, a control header for reset, serial programming, power-down and VCNTL, separate +5 V / +3.3 V supply entry, and a ground pour around the package."
         },
         {
           "title": "VCA8500 simulation evidence",
@@ -407,7 +407,7 @@
         },
         {
           "title": "Current evidence",
-          "text": "Ongoing research. The reference schematic and gain-control simulation are complete; end-to-end hardware validation is ahead."
+          "text": "Ongoing research. The v2 board layout and the gain-control simulation are complete; fabrication, bring-up and end-to-end hardware validation are next."
         }
       ],
       "summary": [
@@ -417,7 +417,7 @@
         },
         {
           "label": "My contribution",
-          "text": "Acquisition planning, analog filtering simulation and VCA8500 reference schematic."
+          "text": "Eight-channel VCA8500 receive board (schematic → v2 layout), gain-control simulation and acquisition planning."
         },
         {
           "label": "Tools",
@@ -425,7 +425,7 @@
         },
         {
           "label": "Validation",
-          "text": "VCA8500 gain-control sweep simulated; reference schematic and netlist exported. Integration and hardware validation in progress."
+          "text": "v2 board routed; VCA8500 gain-control sweep simulated. Fabrication and hardware validation next."
         }
       ],
       "decisions": [
@@ -439,25 +439,31 @@
           "title": "Evaluate variable gain before acquisition",
           "problem": "Photoacoustic receive signals may require gain control ahead of digitization.",
           "decision": "Investigate an eight-channel VCA8500 front end and sweep its single-channel TI model across control voltage.",
-          "evidence": "The KiCad reference schematic and LTspice sweep show about 45 dB of modeled gain control from 0 to 1.2 V VCNTL."
+          "evidence": "The routed v2 receive board implements eight gain-controlled channels; the LTspice sweep shows about 45 dB of modeled gain control from 0 to 1.2 V VCNTL."
         }
       ],
       "card": {
-        "title": "Photoacoustic Acquisition",
-        "description": "Research at Iowa State: an eight-channel VCA8500 variable-gain front end and STM32H7 timer/DMA acquisition for photoacoustic imaging.",
+        "title": "Photoacoustic Tomography",
+        "description": "Research at Iowa State: an eight-channel VCA8500 variable-gain receive board (v2 layout) feeding STM32H7 timer/DMA acquisition for photoacoustic imaging.",
         "labels": [
-          "STM32H7",
           "VCA8500",
+          "STM32H7",
           "KiCad / LTspice"
         ],
-        "status": "Active research · Iowa State University"
+        "status": "v2 receive board routed · Iowa State research"
       },
       "gallery": [
+        {
+          "title": "VCA8500 8-channel receive board · v2 layout",
+          "image": "assets/projects/photoacoustic/vca8500-board-v2-layout.webp",
+          "alt": "KiCad PCB layout of the VCA8500 eight-channel receive board v2: VCA8500 at centre, eight input connectors on the sides, eight output connectors along the bottom, control and power headers at the top.",
+          "caption": "Routed KiCad layout of the eight-channel VCA8500 receive board, revision v2: inputs J1–J8, outputs J9–J16, control header J17 and supply header J18."
+        },
         {
           "title": "VCA8500 reference schematic",
           "image": "assets/projects/photoacoustic/vca8500-reference-schematic.webp",
           "alt": "Actual draft KiCad eight-channel VCA8500 reference schematic with input capacitors, output links, bias bypassing and control-voltage filter.",
-          "caption": "Eight-channel KiCad reference schematic derived from the TI datasheet. Integration in progress."
+          "caption": "Datasheet-based eight-channel reference schematic the board was developed from."
         },
         {
           "title": "Simulated VCA8500 gain control",
