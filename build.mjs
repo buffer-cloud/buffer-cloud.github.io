@@ -13,9 +13,10 @@ const resumeHref = `assets/Amlesh-Sahoo-Resume.pdf?v=${version('assets/Amlesh-Sa
 const siteTitle = 'Amlesh Sahoo — Electrical & Embedded Systems Engineer';
 const siteDescription = 'Electrical engineering portfolio focused on embedded systems, PCB design, firmware, networking, and data acquisition.';
 const origin = 'https://buffer-cloud.github.io/';
+const jsonLd = `<script type="application/ld+json">${JSON.stringify({'@context':'https://schema.org','@type':'Person',name:'Amlesh Sahoo',url:origin,jobTitle:'Electrical Engineering Student — Embedded Systems',email:'mailto:amlesh08@iastate.edu',affiliation:[{'@type':'CollegeOrUniversity',name:'Iowa State University'},{'@type':'CollegeOrUniversity',name:'BITS Pilani'}],knowsAbout:['Embedded systems','PCB design','KiCad','LTspice','ESP32','STM32','Data acquisition','Analog front ends'],sameAs:['https://github.com/buffer-cloud','https://www.linkedin.com/in/amlesh-swarup-sahoo-aab98a362']})}</script>`;
 const header=(prefix='',path='')=>`<a class="skip" href="#main">Skip to content</a><header><a class="wordmark" href="${prefix}index.html" aria-label="Amlesh Sahoo home">AS<span> / </span>AMLESH SAHOO</a><nav aria-label="Main navigation"><a href="${prefix}index.html#work"${path.startsWith('projects/')?' aria-current="location"':''}>Projects</a><a href="${prefix}about.html"${path==='about.html'?' aria-current="page"':''}>About</a><a href="${prefix}${resumeHref}" target="_blank" rel="noopener noreferrer">Resume ↗</a><a href="${prefix}index.html#contact">Contact</a></nav></header>`;
-const footer=(prefix='')=>`<footer><span>© 2026 Amlesh Sahoo</span><div class="footer-links"><a href="https://github.com/buffer-cloud" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/amlesh-swarup-sahoo-aab98a362" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="${prefix}${resumeHref}" target="_blank" rel="noopener noreferrer">Resume ↗</a></div><button class="motion-toggle" type="button" aria-pressed="false" hidden>Pause animation</button></footer>`;
-const shell=(title,body,prefix='',path='',description=siteDescription)=>{
+const footer=(prefix='')=>`<footer><span>© ${new Date().getFullYear()} Amlesh Sahoo</span><div class="footer-links"><a href="https://github.com/buffer-cloud" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://www.linkedin.com/in/amlesh-swarup-sahoo-aab98a362" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="${prefix}${resumeHref}" target="_blank" rel="noopener noreferrer">Resume ↗</a></div><button class="motion-toggle" type="button" aria-pressed="false" hidden>Pause animation</button></footer>`;
+const shell=(title,body,prefix='',path='',description=siteDescription,ogImage='assets/social-card.png',ogAlt='Amlesh Sahoo — From circuit. To system. Electrical and embedded systems portfolio.')=>{
  const fullTitle = path ? `${title} — Amlesh Sahoo` : siteTitle;
  const canonical = origin+path;
  return `<!doctype html>
@@ -27,12 +28,13 @@ const shell=(title,body,prefix='',path='',description=siteDescription)=>{
 <link rel="apple-touch-icon" sizes="180x180" href="${prefix}assets/apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Amlesh Sahoo">
 <meta property="og:title" content="${esc(fullTitle)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${canonical}">
-<meta property="og:image" content="${origin}assets/social-card.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Amlesh Sahoo — From circuit. To system. Electrical and embedded systems portfolio.">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(fullTitle)}"><meta name="twitter:description" content="${esc(description)}"><meta name="twitter:image" content="${origin}assets/social-card.png"><meta name="twitter:image:alt" content="Amlesh Sahoo — From circuit. To system.">
+<meta property="og:image" content="${origin}${ogImage}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="${esc(ogAlt)}">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(fullTitle)}"><meta name="twitter:description" content="${esc(description)}"><meta name="twitter:image" content="${origin}${ogImage}"><meta name="twitter:image:alt" content="${esc(ogAlt)}">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${prefix}style.css?v=${version('style.css')}">
 ${path.startsWith('projects/')?`<link rel="stylesheet" href="${prefix}detail-refinement.css?v=${version('detail-refinement.css')}">`:!path?`<link rel="stylesheet" href="home-refinement.css?v=${version('home-refinement.css')}">`:''}
+${path?'':jsonLd}
 </head><body>${header(prefix,path)}<main id="main" tabindex="-1">${body}</main>${footer(prefix)}<script src="${prefix}motion.js?v=${version('motion.js')}" defer></script>${path.startsWith('projects/')?`<script src="${prefix}detail-refinement.js?v=${version('detail-refinement.js')}" defer></script>`:''}</body></html>`;
 };
 fs.writeFileSync(new URL('index.html',root),shell('Engineering Portfolio',renderHome(data,{esc,imageSize,resumeHref})));
@@ -40,7 +42,7 @@ fs.mkdirSync(new URL('projects/',root),{recursive:true});
 for(const [index,p] of data.projects.entries()){
  const next=data.projects[(index+1)%data.projects.length];
  const body=renderDetail(p,{esc,imageSize,icon,next});
- fs.writeFileSync(new URL(`projects/${p.id}.html`,root),shell(p.title,body,'../',`projects/${p.id}.html`,p.intro));
+ fs.writeFileSync(new URL(`projects/${p.id}.html`,root),shell(p.title,body,'../',`projects/${p.id}.html`,p.intro,`assets/og/${p.id}.jpg`,`${p.title} — project by Amlesh Sahoo`));
 }
 const technicalGroups = [
  ['Embedded','STM32H7 · ESP32 · ATmega328P'],
@@ -57,4 +59,7 @@ const about=`<div class="about-page"><a class="back-link" href="index.html">← 
 <section class="about-section"><h2>Technical focus</h2><div class="technical-groups">${technicalGroups.map(([title,items])=>`<div class="stack-row"><h3>${title}</h3><p>${items}</p></div>`).join('')}</div></section>
 <section class="about-section resume-section"><h2>Resume</h2><p>A concise overview of my education, research, and engineering work.</p><a class="text-link" href="${resumeHref}" target="_blank" rel="noopener noreferrer">Read my resume <span>↗</span></a></section></div>`;
 fs.writeFileSync(new URL('about.html',root),shell('About & Experience',about,'','about.html','Electrical Engineering student in the BITS Pilani–Iowa State dual-degree program. Research, IIT Hyderabad internship experience, and embedded systems technical focus.'));
+const pages=['','about.html',...data.projects.map(p=>`projects/${p.id}.html`)];
+fs.writeFileSync(new URL('sitemap.xml',root),`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map(p=>`  <url><loc>${origin}${p}</loc></url>`).join('\n')}\n</urlset>\n`);
+fs.writeFileSync(new URL('robots.txt',root),`User-agent: *\nAllow: /\nSitemap: ${origin}sitemap.xml\n`);
 console.log(`Built homepage, about page, and ${data.projects.length} dedicated project pages.`);

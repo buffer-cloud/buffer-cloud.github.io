@@ -54,8 +54,8 @@ Report images come from Amlesh's IIT Hyderabad final report. STM32 research is o
 
 ## MCU Data Logger Rev A
 
-- `dist/assets/board-render.png`: actual KiCad render.
-- `dist/assets/gerber-view.png`: top/bottom composite from exported Gerber and drill geometry.
+- `dist/assets/board-render.webp`: actual KiCad render.
+- `dist/assets/gerber-view.webp`: top/bottom composite from exported Gerber and drill geometry.
 - `dist/assets/MCU-Datalogger-RevA.zip`: fabrication layers, separate drill files, maps, notes and checksums.
 
 KiCad 9 reports **0 DRC violations, 0 unconnected pads, 0 footprint/parity errors; schematic ERC 0 errors and 0 warnings**. The board has 29 footprints, 426 segments, 39 vias and a filled B.Cu GND zone.
@@ -77,3 +77,10 @@ Each case study opens with Purpose, My contribution, Tools and Validation facts.
 ## VCA8500 and resume update
 
 The photoacoustic case study now includes the user's draft eight-channel VCA8500 KiCad schematic and model-based control-voltage gain plot. Both are labeled with their current verification limits. The linked `dist/assets/Amlesh-Sahoo-Resume.pdf` is the newly revised one-page, ATS-friendly copy styled to match the earlier portfolio resume, with the VCA8500 work under Iowa State research. Links carry a content version so visitors receive the new PDF after deployment.
+
+## Visual refresh (November 2026)
+
+- Homepage: availability badge, headline stats strip, scrolling toolchain band, image-led project cards (dark featured logger card), dark contact section with a primary email button. Edit `availability` and `stats` at the top of `home-refinement.mjs`.
+- Copy now leads with outcomes; each project keeps its honest limits in the **Validation** summary and technical notes.
+- Images: large PNG/JPEG assets converted to WebP (~6.4 MB → ~0.9 MB); card thumbnails in `dist/assets/thumbs/`, per-project 1200×630 share images in `dist/assets/og/`.
+- SEO: `sitemap.xml`, robots sitemap entry, Person JSON-LD on the homepage, per-page social images.

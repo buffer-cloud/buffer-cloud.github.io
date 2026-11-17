@@ -62,7 +62,7 @@ for(const [file,html] of Object.entries(contents).filter(([f])=>f.startsWith('pr
 }
 const network=contents['projects/networked-nodes.html'];
 assert(/four ESP32/i.test(network)&&network.includes('W5500'),'Four ESP32/W5500 project missing');
-assert(network.includes('four-node-upper.png')&&network.includes('four-node-lower.png'),'Both original four-panel dashboard views must remain visible');
+assert(network.includes('four-node-upper.webp')&&network.includes('four-node-lower.webp'),'Both original four-panel dashboard views must remain visible');
 assert(network.includes('not measured sensor signals'),'Generated-waveform evidence limit missing');
 assert(!Object.values(contents).some(html=>/\b(?:two|2)[- ]node\b/i.test(html)),'Obsolete two-node project content remains');
 const photodiode=contents['projects/photodiode-tia.html'];
@@ -88,8 +88,12 @@ console.log('Verified seven pages, same-tab project navigation, metadata, landma
 
 // Regression guards for the signal-chain refinement and honest project summaries.
 const home = contents['index.html'];
-for(const title of ['MCU Data Logger','Photodiode Sensor','Photoacoustic Acquisition','Embedded Power Systems','Four-Node Ethernet Telemetry'])assert(home.includes(title),`Missing short card title: ${title}`);
-assert(!home.includes('tile-thumbnail'),'Work cards must remain image-free');
+for(const title of ['MCU Data Logger','Photodiode TIA Sensor','Photoacoustic Acquisition','Power-System Monitoring','Four-Node Ethernet Telemetry'])assert(home.includes(title),`Missing short card title: ${title}`);
+assert((home.match(/class="tile-media"/g)||[]).length===5,'Every work card needs its project image');
+assert(home.includes('application/ld+json'),'Homepage structured data missing');
+assert(fs.existsSync(path.join(root,'sitemap.xml')),'Sitemap missing');
+for(const [file,html] of Object.entries(contents).filter(([f])=>f.startsWith('projects/')))assert(/assets\/og\/[\w-]+\.jpg/.test(html),`Per-project social image missing in ${file}`);
+for(const f of fs.readdirSync(path.join(root,'assets')).filter(n=>/\.(png|jpe?g|webp)$/.test(n)))assert(fs.statSync(path.join(root,'assets',f)).size<400_000,`Image needs optimization: ${f}`);
 for(const file of files.filter(f=>f.startsWith('projects/'))){
  for(const label of ['Purpose','My contribution','Tools','Validation'])assert(contents[file].includes(label),`Missing summary ${label} in ${file}`);
 }
@@ -98,7 +102,7 @@ assert(!/deterministic communication/i.test(network),'Unverified network timing 
 console.log('Verified short cards, opening summaries, schematic-first storytelling and network evidence boundaries.');
 
 const pa=contents['projects/photoacoustic.html'];
-assert(pa.includes('VCA8500')&&pa.includes('vca8500-reference-schematic.png')&&pa.includes('vca8500-simulated-gain.png'),'VCA8500 research visuals missing');
-assert(pa.includes('28 ERC errors')&&pa.includes('not measured'),'VCA8500 evidence limits missing');
+assert(pa.includes('VCA8500')&&pa.includes('vca8500-reference-schematic.webp')&&pa.includes('vca8500-simulated-gain.webp'),'VCA8500 research visuals missing');
+assert(/simulation results/i.test(pa)&&pa.includes('not measured'),'VCA8500 evidence limits missing');
 for(const html of Object.values(contents)) assert(/Amlesh-Sahoo-Resume\.pdf\?v=[0-9a-f]{10}/.test(html),'Versioned current resume link missing');
 console.log('Verified VCA8500 visuals, source qualifications and versioned resume links.');
