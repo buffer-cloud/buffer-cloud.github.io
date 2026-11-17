@@ -94,5 +94,13 @@
   "assets/projects/photoacoustic/vca8500-board-v2-layout.webp": [
     785,
     700
+  ],
+  "assets/projects/data-logger/revb-gerber-view.webp": [
+    2400,
+    857
+  ],
+  "assets/projects/data-logger/revb-schematic.webp": [
+    1582,
+    1084
   ]
 }

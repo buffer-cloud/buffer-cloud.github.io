@@ -4,13 +4,13 @@
       "id": "data-logger",
       "number": "01",
       "title": "MCU Data Logger",
-      "intro": "Designed and routed a compact two-layer ATmega328P data-logging board with dual 1 Mbit I²C EEPROMs, a DS1337 real-time clock and full programming access. It passes KiCad's design checks with zero errors and ships with a ready-to-order fabrication package.",
+      "intro": "A compact ATmega328P data-logging board, now in its second revision. Rev A proved the core layout with zero KiCad errors; Rev B redesigns it for battery operation with a protected 3.3 V supply, a backed-up DS3231 RTC that can wake the MCU, and a full set of programming and expansion connectors.",
       "tags": [
         "ATmega328P",
-        "KiCad · 2 layers",
-        "EEPROM · RTC"
+        "KiCad · EasyEDA Pro",
+        "EEPROM · DS3231 RTC"
       ],
-      "status": "Rev A · 0 DRC / ERC errors · fab-ready",
+      "status": "Rev B · schematic + PCB complete · 0 DRC errors",
       "image": "assets/board-render.webp",
       "caption": "Rev A · KiCad 3D render of the final routed board",
       "repo": "https://github.com/buffer-cloud/MCU-Datalogger/tree/pcb-reva-layout",
@@ -30,6 +30,14 @@
         {
           "title": "Design completion & next steps",
           "text": "Gerber and drill files are generated from the verified board. This is a hardware CAD and fabrication package; firmware development, board assembly, power-up checks, and physical performance testing remain bring-up work."
+        },
+        {
+          "title": "Rev B redesign",
+          "text": "A review of Rev A found a battery wired straight onto the supply, a 16 MHz clock running out of spec at low voltage, an RTC alarm that could not reach the MCU, no clock backup, and too little decoupling. Rev B fixes each one: reverse-polarity protection (DMG2305UX) and Schottky power-OR into an MCP1700 1.6 µA LDO, 3.3 V operation with an 8 MHz crystal, a DS3231 TCXO RTC with CR2032 backup and its alarm on INT0, 100 nF at every supply pin, a battery-voltage divider on ADC7, plus FTDI auto-reset, ISP, Qwiic and broken-out analog inputs. Parts were checked on DigiKey and placed from the EasyEDA/LCSC library with matching footprints."
+        },
+        {
+          "title": "Rev B layout",
+          "text": "73.7 × 45.7 mm, two layers, ground pours on both sides and 64 vias. EasyEDA Pro reports 0 schematic and 0 PCB DRC errors. Routing was auto-generated and is due a manual pass before ordering; mounting holes and silkscreen clean-up are the remaining Rev B tasks."
         }
       ],
       "detailImage": "assets/gerber-view.webp",
@@ -50,19 +58,19 @@
       "summary": [
         {
           "label": "Purpose",
-          "text": "Timestamped, nonvolatile acquisition hardware."
+          "text": "Battery-powered, timestamped data logging."
         },
         {
           "label": "My contribution",
-          "text": "Schematic, two-layer routing, design checks and fabrication package."
+          "text": "Rev A layout in KiCad; Rev B design review, schematic, part selection, PCB and Gerbers in EasyEDA Pro."
         },
         {
           "label": "Tools",
-          "text": "ATmega328P · 24LC1025 · DS1337 · KiCad"
+          "text": "ATmega328P · 24LC1025 · DS3231 · MCP1700 · KiCad · EasyEDA Pro"
         },
         {
           "label": "Validation",
-          "text": "0 DRC, ERC and parity errors in KiCad 9. Next: assembly, bring-up and firmware."
+          "text": "Rev A: 0 KiCad DRC/ERC errors. Rev B: 0 schematic and 0 PCB DRC errors. Neither revision has been fabricated yet."
         }
       ],
       "decisions": [
@@ -81,14 +89,34 @@
       ],
       "card": {
         "title": "MCU Data Logger",
-        "description": "A compact 52 × 35 mm logger board: ATmega328P, 2 Mbit of EEPROM storage and a real-time clock, routed clean on two layers.",
+        "description": "An ATmega328P logger in its second revision: Rev B adds protected battery power, a backed-up DS3231 RTC with wake-up alarm, and a full connector set.",
         "labels": [
           "ATmega328P",
           "EEPROM / RTC",
           "KiCad"
         ],
-        "status": "0 DRC / ERC errors · fabrication package ready"
-      }
+        "status": "Rev B · 0 schematic / PCB DRC errors · Gerbers ready"
+      },
+      "gallery": [
+        {
+          "title": "Rev B schematic",
+          "image": "assets/projects/data-logger/revb-schematic.webp",
+          "alt": "EasyEDA Pro schematic of the Rev B data logger: battery input with P-MOSFET protection and Schottky power-OR, MCP1700 LDO, ATmega328P with 8 MHz crystal, two 24LC1025 EEPROMs, DS3231 RTC with coin-cell backup, and FTDI, ISP, Qwiic and I/O headers.",
+          "caption": "Rev B schematic from EasyEDA Pro: protected battery input and power-OR, 3.3 V LDO, ATmega328P at 8 MHz, dual EEPROM, DS3231 RTC with backup cell, and programming/expansion connectors."
+        },
+        {
+          "title": "Rev B Gerber view",
+          "image": "assets/projects/data-logger/revb-gerber-view.webp",
+          "alt": "Top and mirrored bottom views of the Rev B PCB rendered from its exported Gerber and drill files, showing ground pours, routing, pads and the CR2032 holder.",
+          "caption": "Top and bottom (mirrored) views rendered from the exported Rev B Gerber and Excellon files. 0 PCB DRC errors; not yet fabricated."
+        }
+      ],
+      "resources": [
+        {
+          "label": "Download Rev B Gerbers",
+          "url": "../assets/MCU-Datalogger-RevB-Gerber.zip"
+        }
+      ]
     },
     {
       "id": "photodiode-tia",
