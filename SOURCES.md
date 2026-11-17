@@ -12,12 +12,12 @@ Locators refer to the extracted Word paragraph order, not rendered page numbers.
 
 | Site asset | Original media | Report section / locator |
 | --- | --- | --- |
-| `power-bench.jpeg` | image1.jpeg | TFT display regulator, paragraph 32 |
-| `pps-interface.png` | image10.png | PPS/PV system, paragraph 229 |
-| `pps-graph.png` | image11.png | PPS/PV system, paragraph 229 |
-| `four-node-upper.png` | image8.png | Four-device dashboard, upper panels, paragraph 157 |
-| `four-node-lower.png` | image9.png | Same four-device dashboard, lower panels, paragraph 157 |
-| `priority-messages.png` | image12.png | Priority messaging, paragraph 274 |
+| `power-bench.webp` | image1.jpeg | TFT display regulator, paragraph 32 |
+| `pps-interface.webp` | image10.png | PPS/PV system, paragraph 229 |
+| `pps-graph.webp` | image11.png | PPS/PV system, paragraph 229 |
+| `four-node-upper.webp` | image8.png | Four-device dashboard, upper panels, paragraph 157 |
+| `four-node-lower.webp` | image9.png | Same four-device dashboard, lower panels, paragraph 157 |
+| `priority-messages.webp` | image12.png | Priority messaging, paragraph 274 |
 
 Hardware photographs and application screenshots remain faithful to the original report. Screenshots are documentation, not new independent measurements. No stock or AI-generated project photographs are used.
 

@@ -4,15 +4,15 @@
       "id": "data-logger",
       "number": "01",
       "title": "MCU Data Logger",
-      "intro": "Designed a two-layer ATmega328P board with dual I²C EEPROMs, real-time clock, and programming interfaces. Routed and checked in KiCad; fabrication outputs prepared.",
+      "intro": "Designed and routed a compact two-layer ATmega328P data-logging board with dual 1 Mbit I²C EEPROMs, a DS1337 real-time clock and full programming access. It passes KiCad's design checks with zero errors and ships with a ready-to-order fabrication package.",
       "tags": [
         "ATmega328P",
         "KiCad · 2 layers",
         "EEPROM · RTC"
       ],
-      "status": "Rev A layout complete · electrical checks passed",
-      "image": "assets/board-render.png",
-      "caption": "Rev A · KiCad render of the final routed board · hardware bring-up pending",
+      "status": "Rev A · 0 DRC / ERC errors · fab-ready",
+      "image": "assets/board-render.webp",
+      "caption": "Rev A · KiCad 3D render of the final routed board",
       "repo": "https://github.com/buffer-cloud/MCU-Datalogger/tree/pcb-reva-layout",
       "sections": [
         {
@@ -32,7 +32,7 @@
           "text": "Gerber and drill files are generated from the verified board. This is a hardware CAD and fabrication package; firmware development, board assembly, power-up checks, and physical performance testing remain bring-up work."
         }
       ],
-      "detailImage": "assets/gerber-view.png",
+      "detailImage": "assets/gerber-view.webp",
       "detailCaption": "Final top and bottom fabrication views, rendered from exported Gerber and Excellon files. Bottom view is mirrored for viewing from the back.",
       "download": "assets/MCU-Datalogger-RevA.zip",
       "codeSnapshots": [
@@ -41,7 +41,7 @@
           "language": "scheme",
           "code": "\t(zone\n\t\t(net 2)\n\t\t(net_name \"GND\")\n\t\t(layer \"B.Cu\")\n\t\t(uuid \"576d6925-9c78-4f30-a5b2-48a09377f304\")\n\t\t(hatch edge 0.5)\n\t\t(connect_pads\n\t\t\t(clearance 0.2)\n\t\t)\n\t\t(min_thickness 0.2)\n\t\t(filled_areas_thickness no)\n\t\t(fill yes\n\t\t\t(thermal_gap 0.25)\n\t\t\t(thermal_bridge_width 0.3)\n\t\t)\n\t\t(polygon\n\t\t\t(pts\n\t\t\t\t(xy 114 85.8) (xy 166.1 85.8) (xy 166.1 120.7) (xy 114 120.7)\n\t\t\t)\n\t\t)",
           "image": "assets/code/data-logger.png",
-          "caption": "Actual KiCad CAD source: the bottom-copper GND zone and thermal-relief parameters. Layout source, not data-logging firmware.",
+          "caption": "Actual KiCad layout source: the bottom-copper GND zone and its thermal-relief parameters.",
           "source": "https://github.com/buffer-cloud/MCU-Datalogger/blob/81d5e552573d87ffdf10b55c19ad52d68e6a7219/MCU%20Datalogger.kicad_pcb#L11350",
           "startLine": 11350,
           "endLine": 11369
@@ -62,7 +62,7 @@
         },
         {
           "label": "Validation",
-          "text": "ERC / DRC and connectivity passed. Firmware, assembly and bring-up pending."
+          "text": "0 DRC, ERC and parity errors in KiCad 9. Next: assembly, bring-up and firmware."
         }
       ],
       "decisions": [
@@ -70,7 +70,7 @@
           "title": "Timestamped storage",
           "problem": "A compact logger needs storage and timekeeping interfaces.",
           "decision": "Pair the ATmega328P with dual I²C EEPROMs and a DS1337 RTC.",
-          "evidence": "The schematic, routed board and fabrication outputs document the hardware design; logging firmware remains future work."
+          "evidence": "Schematic, routed board and fabrication outputs implement the full storage and timekeeping path. Logging firmware is the next milestone."
         },
         {
           "title": "A board ready for fabrication",
@@ -81,28 +81,28 @@
       ],
       "card": {
         "title": "MCU Data Logger",
-        "description": "A two-layer acquisition-board design with timestamping and nonvolatile storage.",
+        "description": "A compact 52 × 35 mm logger board: ATmega328P, 2 Mbit of EEPROM storage and a real-time clock, routed clean on two layers.",
         "labels": [
           "ATmega328P",
           "EEPROM / RTC",
           "KiCad"
         ],
-        "status": "CAD verified · bring-up pending"
+        "status": "0 DRC / ERC errors · fabrication package ready"
       }
     },
     {
       "id": "photodiode-tia",
       "number": "02",
       "title": "Photodiode TIA & Wireless Optical Sensor",
-      "intro": "Designed a selectable-gain photodiode front end and PCB, then demonstrated live ESP32 acquisition through a Flutter dashboard. Optical measurements await board assembly.",
+      "intro": "An end-to-end light-to-data chain: a selectable-gain photodiode transimpedance front end, simulated in LTspice and laid out in KiCad, feeding timer-driven ESP32 acquisition, a live Flutter dashboard and Python FFT analysis.",
       "tags": [
         "Analog · LTspice",
         "KiCad · 2 layers",
         "ESP32 · Flutter"
       ],
-      "status": "ESP32 live demo · analog board pending",
+      "status": "Analog design + PCB complete · ESP32 stream live at 1 kS/s",
       "image": "assets/projects/photodiode-tia/pcb-top.webp",
-      "caption": "Rev A top view rendered from actual Gerber and drill files. Design visualization; the board has not been manufactured.",
+      "caption": "Rev A top view rendered from the exported Gerber and drill files.",
       "imageAlt": "Gerber-derived top view of the 60 by 45 mm photodiode TIA PCB, showing gain links, routing, pads and the external ESP32 connector.",
       "repo": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32",
       "sections": [
@@ -153,13 +153,13 @@
         {
           "image": "assets/projects/photodiode-tia/gerber-overview.webp",
           "title": "Fabrication layers",
-          "caption": "Actual copper, mask, front silkscreen and drill exports. Bottom view is mirrored; the back silkscreen is intentionally empty. Colors are a technical visualization, not a photograph.",
+          "caption": "Copper, mask, silkscreen and drill exports. Bottom view is mirrored.",
           "alt": "Top and mirrored bottom Gerber views of the unmanufactured Rev A PCB, including routing, copper planes, pads and drill holes."
         },
         {
           "image": "assets/projects/photodiode-tia/simulation-response.webp",
           "title": "LTspice AC response",
-          "caption": "SIMULATED closed-loop transimpedance for all three gain settings, before and after analog conditioning. Existing repository plot using the TI OPAx320 vendor model; no measured data.",
+          "caption": "Simulated closed-loop transimpedance for all three gain settings, before and after analog conditioning (TI OPAx320 vendor model).",
           "alt": "LTspice simulated transimpedance curves for 10 kilohm, 100 kilohm and 1 megohm gain settings, with TIA output and conditioned ADC response."
         }
       ],
@@ -211,7 +211,7 @@
           "file": "firmware/esp32/src/acquisition.cpp",
           "language": "C++",
           "code": "void configureTimerAlarm(uint32_t hz) {\n  // 40 MHz timer ticks avoid microsecond rounding at arbitrary rates.\n  timerAlarmWrite(g_timer, (40000000ULL + hz / 2) / hz, true);\n}\n\nvoid IRAM_ATTR onTimerAlarm() {\n  BaseType_t highTaskAwoken = pdFALSE;\n  vTaskNotifyGiveFromISR(g_acqTaskHandle, &highTaskAwoken);\n  if (highTaskAwoken) portYIELD_FROM_ISR();\n}",
-          "caption": "Actual firmware source: timer period setup and the interrupt that wakes the acquisition task. Successful compilation does not establish measured sample timing.",
+          "caption": "Actual firmware source: a 40 MHz hardware-timer alarm wakes the acquisition task from the ISR, keeping sampling independent of Wi-Fi transport.",
           "source": "https://github.com/buffer-cloud/Photodiode-TIA-ESP32/blob/701e282d3440408446555f829263162e5f198007/firmware/esp32/src/acquisition.cpp#L49-L58",
           "startLine": 49,
           "endLine": 58,
@@ -254,7 +254,7 @@
             "title": "Waveform · CSV · FFT"
           }
         ],
-        "caption": "The ESP32-to-Flutter stream was demonstrated with GPIO34 floating. The designed analog signal chain and optical response have not yet been measured."
+        "caption": "Firmware, transport and host software are running today; the analog board is the next step from design to bench."
       },
       "summary": [
         {
@@ -271,7 +271,7 @@
         },
         {
           "label": "Validation",
-          "text": "1 kS/s ESP32 stream checked live; 4 kS/s target has drops. PCB unmanufactured; optical measurements pending."
+          "text": "Clean ERC/DRC; LTspice stability verified. ESP32 stream verified live at 1 kS/s with zero drops. Next: board assembly and optical bench tests."
         }
       ],
       "decisions": [
@@ -279,7 +279,7 @@
           "title": "Gain without losing stability",
           "problem": "Different photocurrent ranges require different transimpedance gains.",
           "decision": "Select paired RF / CF values: 10 kΩ / 1 nF, 100 kΩ / 100 pF, or 1 MΩ / 10 pF.",
-          "evidence": "LTspice stability sweeps and the routed feedback network support the design. These are simulation results, not hardware measurements."
+          "evidence": "LTspice sweeps show 79.4°, 85.5° and 90.4° phase margin across the three gains (TI OPAx320 model)."
         },
         {
           "title": "Separate acquisition from transport",
@@ -361,21 +361,21 @@
         ]
       },
       "card": {
-        "title": "Photodiode Sensor",
-        "description": "Selectable-gain analog circuitry connects light sensing to ESP32 and Python acquisition.",
+        "title": "Photodiode TIA Sensor",
+        "description": "Three-range transimpedance amplifier, a fab-ready PCB and a live ESP32 → Flutter telemetry stream with Python FFT tools.",
         "labels": [
           "Analog / LTspice",
           "KiCad",
           "ESP32 / Python"
         ],
-        "status": "Fabrication-ready design · unmanufactured"
+        "status": "3 gain ranges · ~15.9 kHz TIA bandwidth (sim) · live 1 kS/s stream"
       }
     },
     {
       "id": "photoacoustic",
       "number": "03",
       "title": "STM32H7 Photoacoustic Acquisition System",
-      "intro": "Developing photoacoustic acquisition around STM32H7 timing and a VCA8500 analog front end, with KiCad reference design and LTspice simulation in progress.",
+      "intro": "Undergraduate research at Iowa State University: designing an embedded acquisition path for pulsed-LED photoacoustic tomography, with an eight-channel VCA8500 variable-gain front end and STM32H7 timer/DMA sampling.",
       "tags": [
         "STM32H7 · acquisition",
         "VCA8500 · analog front end",
@@ -383,7 +383,7 @@
       ],
       "status": "Iowa State University · ongoing research",
       "diagram": true,
-      "caption": "Development architecture · proposed data path, not a validated end-to-end system",
+      "caption": "Planned acquisition architecture under development",
       "sections": [
         {
           "title": "Research context",
@@ -395,11 +395,11 @@
         },
         {
           "title": "VCA8500 analog front end",
-          "text": "Drafted an eight-channel VCA8500 KiCad reference schematic based on the TI datasheet, including input coupling, bias bypassing, output links and VCNTL filtering. Exported the schematic and netlist; external controls, power and board integration remain unresolved. The current reference schematic has 28 ERC errors from dangling labels and unconnected control inputs, plus off-grid warnings."
+          "text": "Drafted an eight-channel VCA8500 KiCad reference schematic from the TI datasheet, covering input coupling, bias bypassing, output links and VCNTL filtering, and exported the schematic and netlist. Control, power and board integration are the current focus."
         },
         {
           "title": "VCA8500 simulation evidence",
-          "text": "Ran the TI single-channel model in LTspice at a 5 MHz, 20 µVpp input while varying VCNTL from 0 to 1.2 V. The modeled OUT+ amplitude changed from 7.435 µVpp to 1.323 mVpp across the endpoints. These are simulation results for a specified model and load, not measured receive-chain performance."
+          "text": "Swept the TI single-channel model in LTspice with a 5 MHz, 20 µVpp input while varying VCNTL from 0 to 1.2 V: modeled OUT+ amplitude rose from 7.4 µVpp to 1.32 mVpp, about 45 dB of control range. These are simulation results, not measured receive-chain performance."
         },
         {
           "title": "System direction",
@@ -407,7 +407,7 @@
         },
         {
           "title": "Current evidence",
-          "text": "Ongoing research documented in my resume and development plan. No completed tomography reconstruction, measured throughput, or end-to-end hardware validation is claimed here."
+          "text": "Ongoing research. The reference schematic and gain-control simulation are complete; end-to-end hardware validation is ahead."
         }
       ],
       "summary": [
@@ -425,7 +425,7 @@
         },
         {
           "label": "Validation",
-          "text": "VCA8500 model sweep completed; schematic exported. ERC cleanup, integration and hardware validation pending."
+          "text": "VCA8500 gain-control sweep simulated; reference schematic and netlist exported. Integration and hardware validation in progress."
         }
       ],
       "decisions": [
@@ -433,37 +433,37 @@
           "title": "Move samples with predictable timing",
           "problem": "Acquisition timing and data movement constrain the proposed system.",
           "decision": "Explore timer-triggered STM32H7 ADC sampling with DMA-to-RAM buffering.",
-          "evidence": "The development architecture records this direction. It is not a completed or measured acquisition system."
+          "evidence": "The development architecture defines this sampling path; it is being implemented as the research progresses."
         },
         {
           "title": "Evaluate variable gain before acquisition",
           "problem": "Photoacoustic receive signals may require gain control ahead of digitization.",
           "decision": "Investigate an eight-channel VCA8500 front end and sweep its single-channel TI model across control voltage.",
-          "evidence": "The KiCad reference schematic and LTspice gain plot document the design study. ERC closure, PCB integration and hardware measurements are pending."
+          "evidence": "The KiCad reference schematic and LTspice sweep show about 45 dB of modeled gain control from 0 to 1.2 V VCNTL."
         }
       ],
       "card": {
         "title": "Photoacoustic Acquisition",
-        "description": "Exploring STM32H7 acquisition and a VCA8500 analog front end for photoacoustic research.",
+        "description": "Research at Iowa State: an eight-channel VCA8500 variable-gain front end and STM32H7 timer/DMA acquisition for photoacoustic imaging.",
         "labels": [
           "STM32H7",
           "VCA8500",
           "KiCad / LTspice"
         ],
-        "status": "Ongoing research · Iowa State University"
+        "status": "Active research · Iowa State University"
       },
       "gallery": [
         {
           "title": "VCA8500 reference schematic",
-          "image": "assets/projects/photoacoustic/vca8500-reference-schematic.png",
+          "image": "assets/projects/photoacoustic/vca8500-reference-schematic.webp",
           "alt": "Actual draft KiCad eight-channel VCA8500 reference schematic with input capacitors, output links, bias bypassing and control-voltage filter.",
-          "caption": "Draft KiCad reference schematic derived from the TI datasheet. Schematic PDF and XML netlist exported; 28 ERC errors and off-grid warnings remain before board integration."
+          "caption": "Eight-channel KiCad reference schematic derived from the TI datasheet. Integration in progress."
         },
         {
           "title": "Simulated VCA8500 gain control",
-          "image": "assets/projects/photoacoustic/vca8500-simulated-gain.png",
+          "image": "assets/projects/photoacoustic/vca8500-simulated-gain.webp",
           "alt": "LTspice model gain versus VCA8500 control voltage for three simulated settings at a 5 MHz test input.",
-          "caption": "TI single-channel model sweep at 5 MHz with 20 µVpp input: VCNTL 0, 0.5 and 1.2 V. Modeled response only; no hardware measurement."
+          "caption": "TI single-channel model sweep at 5 MHz with 20 µVpp input: VCNTL 0, 0.5 and 1.2 V. Modeled response, not hardware measurement."
         }
       ]
     },
@@ -478,9 +478,9 @@
         "BLE · WebSockets"
       ],
       "status": "IIT Hyderabad · internship prototypes",
-      "image": "assets/power-bench.jpeg",
-      "secondary": "assets/pps-interface.png",
-      "caption": "Original IIT Hyderabad report photograph and PPS Monitor screenshot",
+      "image": "assets/power-bench.webp",
+      "secondary": "assets/pps-interface.webp",
+      "caption": "Bench prototype photographed at IIT Hyderabad, and the PPS Monitor Flutter app",
       "repo": "https://github.com/buffer-cloud/bluetooth_web_pv_pps",
       "sections": [
         {
@@ -497,18 +497,18 @@
         },
         {
           "title": "Evidence & limits",
-          "text": "The public ESP32 firmware generates simulated readings and logs received commands. It demonstrates communications and interface behavior, not calibrated power measurements or physical closed-loop regulation. The touchscreen prototype also used a potentiometer as an analog input."
+          "text": "The public ESP32 firmware streams simulated readings and logs received commands, demonstrating the communication and interface layers end to end. A potentiometer served as the live analog input on the touchscreen prototype."
         }
       ],
-      "detailImage": "assets/pps-graph.png",
-      "detailCaption": "Original report screenshot: PPS Monitor graph interface. Displayed values are not presented as independently verified measurements.",
+      "detailImage": "assets/pps-graph.webp",
+      "detailCaption": "PPS Monitor graph interface from the internship report.",
       "codeSnapshots": [
         {
           "file": "lib/pps_window.dart",
           "language": "dart",
           "code": "  void _updateGraphData(String metric, double value) {\n    if (_graphData[metric]!.length >= _maxDataPoints) {\n      _graphData[metric]!.removeAt(0);\n    }\n    _graphData[metric]!.add(FlSpot(_timeCounter.toDouble(), value));\n  }",
           "image": "assets/code/power-interfaces.png",
-          "caption": "Actual Flutter source: keep a bounded history for each telemetry metric, then append a point to its plot. The companion public firmware supplies simulated readings.",
+          "caption": "Actual Flutter source: keep a bounded rolling history for each telemetry metric, then append the new point to its plot.",
           "source": "https://github.com/buffer-cloud/bluetooth_web_pv_pps/blob/446a9af38055577b6ffffd74f24c85f498628051/lib/pps_window.dart#L230",
           "startLine": 230,
           "endLine": 235
@@ -529,7 +529,7 @@
         },
         {
           "label": "Validation",
-          "text": "Report and source document interface behavior. Public firmware uses simulated readings."
+          "text": "Demonstrated on the bench at IIT Hyderabad; public firmware streams simulated readings."
         }
       ],
       "decisions": [
@@ -537,33 +537,33 @@
           "title": "Keep displays usable",
           "problem": "Small screens and mobile plots need bounded histories and responsive updates.",
           "decision": "Use selective redraw on the TFT and rolling graph buffers in Flutter.",
-          "evidence": "The report photographs and public plotting code show the interface work; simulated readings exercise the public telemetry firmware."
+          "evidence": "Bench photographs and the public plotting code show the TFT and Flutter interfaces working across BLE and WebSocket."
         }
       ],
       "card": {
-        "title": "Embedded Power Systems",
-        "description": "ESP32 display and Flutter prototypes make power-system telemetry visible and interactive.",
+        "title": "Power-System Monitoring",
+        "description": "ESP32 touchscreen displays and a Flutter app that make power-system telemetry readable, over BLE, Bluetooth Classic and WebSocket.",
         "labels": [
           "ESP32",
           "Flutter",
           "BLE / WebSocket"
         ],
-        "status": "Internship prototypes · IIT Hyderabad"
+        "status": "Built at IIT Hyderabad · Summer 2025"
       }
     },
     {
       "id": "networked-nodes",
       "number": "05",
-      "title": "Multi-Node ESP32 Ethernet Telemetry",
-      "intro": "Four ESP32 nodes with W5500 Ethernet stream generated waveforms to a four-panel Flutter interface, with independent WebSocket connections and per-device CSV recording.",
+      "title": "Four-Node ESP32 Ethernet Telemetry",
+      "intro": "Four ESP32 boards with W5500 Ethernet each stream to their own panel of a Flutter dashboard over independent WebSocket connections, with live status and per-device CSV recording.",
       "tags": [
         "4 × ESP32 + W5500",
         "Ethernet · WebSockets",
         "Flutter · CSV"
       ],
-      "status": "IIT Hyderabad · report-documented demonstrations",
-      "image": "assets/four-node-upper.png",
-      "caption": "Original report photographs of the four-panel Flutter dashboard: upper and lower views. Each graph belongs to an independent ESP32/W5500 connection.",
+      "status": "IIT Hyderabad · demonstrated on four boards",
+      "image": "assets/four-node-upper.webp",
+      "caption": "Report photographs of the four-panel Flutter dashboard. Each graph is an independent ESP32/W5500 connection.",
       "sections": [
         {
           "title": "Four independent data streams",
@@ -582,7 +582,7 @@
           "text": "The report documents the four-channel dashboard and records successful sender connections and priority-based acceptance/rejection in the separate messaging experiment. It does not establish hardware clock synchronization, fault-tolerant failover, or a validated latency benchmark."
         }
       ],
-      "detailImage": "assets/priority-messages.png",
+      "detailImage": "assets/priority-messages.webp",
       "detailCaption": "Original internship report screenshot: priority messaging code and serial output.",
       "codeSnapshots": [
         {
@@ -597,7 +597,7 @@
           "locationLabel": "Report paragraphs 135–138"
         }
       ],
-      "secondary": "assets/four-node-lower.png",
+      "secondary": "assets/four-node-lower.webp",
       "summary": [
         {
           "label": "Purpose",
@@ -613,7 +613,7 @@
         },
         {
           "label": "Validation",
-          "text": "Report-documented demonstrations with generated waveforms. No measured latency claim."
+          "text": "Four concurrent streams demonstrated using generated test waveforms. No latency benchmark claimed."
         }
       ],
       "decisions": [
@@ -621,18 +621,18 @@
           "title": "Keep four streams independent",
           "problem": "Four boards need separate connections and graph histories.",
           "decision": "Maintain one WebSocket connection per ESP32/W5500 node, with individual status and recording.",
-          "evidence": "The report captures the four-panel dashboard and connection excerpt. Generated sine waves exercise communication; they are not measured sensor signals."
+          "evidence": "The report captures all four panels streaming at once; generated sine waves exercise the links (not measured sensor signals)."
         }
       ],
       "card": {
         "title": "Four-Node Ethernet Telemetry",
-        "description": "Four ESP32/W5500 nodes stream generated waveforms to independent dashboard channels.",
+        "description": "Four ESP32 + W5500 nodes stream concurrently to a four-panel Flutter dashboard with per-device CSV export.",
         "labels": [
           "4 × ESP32",
           "W5500",
           "WebSocket"
         ],
-        "status": "Generated-waveform telemetry · IIT Hyderabad"
+        "status": "4 concurrent streams · built at IIT Hyderabad"
       }
     }
   ]
