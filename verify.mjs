@@ -88,7 +88,7 @@ console.log('Verified seven pages, same-tab project navigation, metadata, landma
 
 // Regression guards for the signal-chain refinement and honest project summaries.
 const home = contents['index.html'];
-for(const title of ['MCU Data Logger','Photodiode TIA Sensor','Photoacoustic Acquisition','Power-System Monitoring','Four-Node Ethernet Telemetry'])assert(home.includes(title),`Missing short card title: ${title}`);
+for(const title of ['MCU Data Logger','Photodiode TIA Sensor','Photoacoustic Tomography','Power-System Monitoring','Four-Node Ethernet Telemetry'])assert(home.includes(title),`Missing short card title: ${title}`);
 assert((home.match(/class="tile-media"/g)||[]).length===5,'Every work card needs its project image');
 assert(home.includes('application/ld+json'),'Homepage structured data missing');
 assert(fs.existsSync(path.join(root,'sitemap.xml')),'Sitemap missing');
@@ -102,7 +102,7 @@ assert(!/deterministic communication/i.test(network),'Unverified network timing 
 console.log('Verified short cards, opening summaries, schematic-first storytelling and network evidence boundaries.');
 
 const pa=contents['projects/photoacoustic.html'];
-assert(pa.includes('VCA8500')&&pa.includes('vca8500-reference-schematic.webp')&&pa.includes('vca8500-simulated-gain.webp'),'VCA8500 research visuals missing');
+assert(pa.includes('VCA8500')&&pa.includes('vca8500-board-v2-layout')&&pa.includes('vca8500-reference-schematic.webp')&&pa.includes('vca8500-simulated-gain.webp'),'VCA8500 research visuals missing');
 assert(/simulation results/i.test(pa)&&pa.includes('not measured'),'VCA8500 evidence limits missing');
 for(const html of Object.values(contents)) assert(/Amlesh-Sahoo-Resume\.pdf\?v=[0-9a-f]{10}/.test(html),'Versioned current resume link missing');
 console.log('Verified VCA8500 visuals, source qualifications and versioned resume links.');

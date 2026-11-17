@@ -69,3 +69,8 @@ The signal-chain hero, project SVG icons and four-node system diagram are explan
 ## Photoacoustic VCA8500 research update
 
 The additional website images are copied unchanged from the user's local photoacoustic research package: `kicad/VCA8500_Reference/export/schematic.png` and `ltspice/VCA8500_VCNTL_Sweep_Package/vcntl_gain_summary.png`. The KiCad drawing is an eight-channel reference schematic based on the TI VCA8500 datasheet. Its PDF and XML netlist exported, but ERC currently reports 28 open errors and off-grid warnings; power, controls, parts, layout and integration need work. The LTspice plot is a TI single-channel-model simulation at 5 MHz with a 20 µVpp input and VCNTL settings of 0, 0.5 and 1.2 V. Its gain values are modeled, not measured. No VCA8500 hardware validation or complete photoacoustic acquisition is claimed.
+
+## November 2026 card imagery
+
+- `dist/assets/projects/photoacoustic/vca8500-board-v2-layout.webp`: supplied by Amlesh, a screenshot of the routed KiCad layout of the eight-channel VCA8500 receive board, revision v2. It is a CAD layout; fabrication and hardware validation have not been done.
+- `dist/assets/thumbs/power-interfaces.webp` and `dist/assets/thumbs/networked-nodes.webp` are original illustrations drawn for the portfolio (SVG rendered to WebP). Values and waveforms shown in them are illustrative, not measurements; original report photographs stay on the project pages.

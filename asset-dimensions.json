@@ -80,15 +80,19 @@
     643
   ],
   "assets/thumbs/photoacoustic.webp": [
-    1000,
-    650
+    1200,
+    750
   ],
   "assets/thumbs/power-interfaces.webp": [
-    1000,
-    650
+    1200,
+    750
   ],
   "assets/thumbs/networked-nodes.webp": [
-    1000,
-    643
+    1200,
+    750
+  ],
+  "assets/projects/photoacoustic/vca8500-board-v2-layout.webp": [
+    785,
+    700
   ]
 }
